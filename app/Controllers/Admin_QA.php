@@ -43,7 +43,7 @@ class Admin_QA extends BaseController
         
         // You can now use the model in your methods
         $data['barang'] = $this->databarangModel->ambildatabarang();
-        $data['title'] = "Data Barang Admin ";
+        $data['title'] = "Data Barang Admin QA ";
         $data['barang'] = $this->databarangModel->paginate(4);
         $data['pager'] = $this->databarangModel->pager;
         // Return a view or process the data as needed

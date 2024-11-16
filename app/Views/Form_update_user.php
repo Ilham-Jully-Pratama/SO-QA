@@ -37,7 +37,7 @@
                                                 <div class="form-group">
                                                     <label>Role</label>
                                                     <select class="form-control" name="role">
-                                                        <option value="1" <?= ($dd['role'] == 'admin') ? 'selected' : ''; ?>>admin</option>
+                                                        <option value="1" <?= ($dd['role'] == 'admin_kalkual') ? 'selected' : ''; ?>>admin kalkual</option>
                                                         <option value="2" <?= ($dd['role'] == 'user') ? 'selected' : ''; ?>>user</option>
                                                         <option value="3" <?= ($dd['role'] == 'supervisor') ? 'selected' : ''; ?>>supervisor</option>
                                                         <option value="5" <?= ($dd['role'] == 'admin_qa') ? 'selected' : ''; ?>>admin QA</option> <!-- Menampilkan nama satuan -->

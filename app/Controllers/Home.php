@@ -120,7 +120,7 @@ class Home extends BaseController
         
         // You can now use the model in your methods
         $data['barang'] = $this->databarangModel->ambildatabarang();
-        $data['title'] = "Data Barang";
+        $data['title'] = "Data Barang Kalkual";
         $data['barang'] = $this->databarangModel->paginate(4);
         $data['pager'] = $this->databarangModel->pager;
 
@@ -196,13 +196,114 @@ class Home extends BaseController
         // Ensure the validation object is passed correctly
         return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
     }
+    public function ubahbarang($kodebarang)
+    { 
+        
+        $data['masuk'] = $this->databarangModel->ambildatabarangubah($kodebarang);
+        return view('So_barang/Form_ubah_barang',$data );
+    }
+    public function submit_ubah_barang($id)
+    { 
+       
+        if ($this->validate([
+            'kodebarang' => "required|is_unique[databarang.kodebarang.id, id, {$id}]",
+            'namabarang' => 'required',
+            'satuan'     => 'required',
+            'jumlahbarang' => 'required',
+            'expired'    => 'required',
+            'coa'        => 'required',
+            'msds'       => 'required',
+        ],[
+            'kodebarang'=>[
+                'required' =>'Kode Barang Harus Di isi',
+                'is_unique'=>'Kode Barang Sudah digunakan'
+            ],
+            'namabarang'=>[
+                'required'=> 'Nama Barang Harus Di isi'
+            ],
+            'satuan'=>[
+                'required'=> 'Satuan Barang Harus Di isi'
+            ],
+            'jumlahbarang'=>[
+                'required'=> 'Jumlah Barang Harus Di isi'
+            ],
+            'expired'=>[
+                'required'=> 'Expired Barang Harus Di isi'
+            ],
+            'coa'=>[
+                'required'=> 'COA Barang Harus Di isi'
+            ],
+            'msds'=>[
+                'required'=> 'MSDS Barang Harus Di isi'
+            ],
+                     
+        ])) { // Perbaiki di sini
+            $data = [
+                'kodebarang' => $this->request->getVar('kodebarang'),
+                'namabarang' => $this->request->getVar('namabarang'),
+                'satuan' => $this->request->getVar('satuan'),
+                'jumlah' => $this->request->getVar('jumlahbarang'),
+                'expired' => $this->request->getVar('expired'),
+                'nama' => $this->request->getVar('nama'),
+                'coa' => $this->request->getVar('coa'),
+                'msds' => $this->request->getVar('msds'),
+                
+            ];
+            $this->databarangModel->submitubahbarang($data,$id);
+            $this->session->setFlashdata('pesan', 'Data Berhasil Terupdate'); // Pastikan ini adalah string, bukan array
+            return redirect()->to('/databarang',);           
+        }
+        session()->setFlashdata('pesan', 'Data Belum Terupdate');
+        // Ensure the validation object is passed correctly
+        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
+    }
     public function delete($id)
     { 
         $this->databarangModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to('/databarang ');
     }
+    public function submitnamabarang()
+    { 
+        if ($this->validate([
+            'namabarang' => 'required',
+        ],[
+            'namabarang'=>[
+                'required'=> 'Nama Harus Disi'
+            ]
+                     
+        ])) { // Perbaiki di sini
+            $data = [
+                
+                'namabarang' => $this->request->getVar('namabarang'),
+                              
+            ];
+            $this->databarangModel->submitnamabarang($data);
+            $this->session->setFlashdata('pesan', 'Data Berhasil Ditambahkan'); // Pastikan ini adalah string, bukan array
+            return redirect()->to('/tambah_data_barang');      
+        }
+        session()->setFlashdata('alert', 'Data Belum Ditambahkan');
+        // Ensure the validation object is passed correctly
+        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
+    }
+    public function daftarnamabarang(): string
+    { 
+        return view('So_barang/Form_nama_barang', );
 
+    }
+    public function hapusnamabarang(): string
+    { 
+        $data['barang'] = $this->databarangModel->caridaftarbarang();
+        return view('So_barang/V_list_nama_barang', $data);
+    }
+    public function deletedaftarnamabarang($id)
+    { 
+        $this->databarangModel->deletedaftarnamabarang($id);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus');
+        return redirect()->to('/tambah_data_barang');
+    }
+
+// barang masuk
     public function barang_masuk($kodebarang): string
     {
        
@@ -219,12 +320,16 @@ class Home extends BaseController
         if ($this->validate([
             'jumlahbarang' => 'required',
             'tanggal'      => 'required',
+            'keterangan'      => 'required',
         ],[
             'jumlahbarang'=>[
                 'required' =>'jumlah barang harus diisi'
             ],
             'tanggal'=>[
                 'required' =>'tanggal harus diisi'
+            ],
+            'keterangan'=>[
+                'required' =>'keterangan harus diisi'
             ],
             
 
@@ -237,6 +342,7 @@ class Home extends BaseController
                 'expired' => $this->request->getVar('expired'),
                 'nama' => $this->request->getVar('nama'),
                 'tanggal' => $this->request->getVar('tanggal'),
+                'keterangan' => $this->request->getVar('tanggal'),
             ];
             $this->databarangModel->submitbarangmasuk($data);
             session()->setFlashdata('pesan', 'Data berhasil ditambah');
@@ -262,6 +368,69 @@ class Home extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to('/laporanbarangmasuk ');
     }
+    public function caridatamasuk()
+    { 
+        if ($this->validate([
+            'tgl_awal'  => 'required',
+            'tgl_akhir' => 'required',
+
+        ],[
+            'tgl_awal'=>[
+                'required' =>'Tanggal Awal Harus Disi'
+            ],
+            'tgl_akhir'=>[
+                'required' =>'Tanggal Akhir Harus Disi'
+            ],       
+        ])) {
+            $data = [
+                'tgl_awal' => $this->request->getVar('tgl_awal'), // Corrected key for start date
+                'tgl_akhir' => $this->request->getVar('tgl_akhir'), 
+            ];
+            $hasil['barang'] = $this->databarangModel->caridatamasuk($data);
+            return view('So_barang/V_LBmasuk',$hasil); 
+        }
+        // else
+        session()->setFlashdata('alert', 'Tanggal Awal dan Akhir Harus Sesuai');
+        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
+    }
+    public function ubahbarangmasuk($kodebarang)
+    { 
+        
+        $data['masuk'] = $this->databarangModel->dataubahbarangmasuk($kodebarang);
+        
+        return view('So_barang/Form_ub_masuk',$data );
+    }
+    public function submit_ubah_barang_masuk($id)
+    { 
+       
+        if ($this->validate([
+            'jumlahbarang' => 'required',
+            'keterangan' => 'required',
+        ],[
+            'jumlahbarang'=>[
+                'required'=> 'Jumlah Barang Harus Di isi'
+            ],
+            'keterangan'=>[
+                'required'=> 'keterangan Barang Harus Di isi'
+            ]
+                     
+        ])) { // Perbaiki di sini
+            $data = [
+                
+                'jumlah' => $this->request->getVar('jumlahbarang'),
+                'keterangan' => $this->request->getVar('keterangan'),
+                              
+            ];
+            $this->databarangModel->submitubahbarangmasuk($data,$id);
+            $this->session->setFlashdata('pesan', 'Data Berhasil Terupdate'); // Pastikan ini adalah string, bukan array
+            return redirect()->to('/databarang',);           
+        }
+        session()->setFlashdata('pesan', 'Data Belum Terupdate');
+        // Ensure the validation object is passed correctly
+        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
+    }
+
+    // barang keluar
     public function barang_keluar($kodebarang): string
     {
         
@@ -446,31 +615,44 @@ class Home extends BaseController
         session()->setFlashdata('alert', 'Tanggal Awal dan Akhir Harus Sesuai');
         return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());// Pass results to the view     
     }
-    public function caridatamasuk()
+    public function ubahbarangkeluar($kodebarang)
     { 
+        
+        $data['masuk'] = $this->databarangModel->dataubahbarangkeluar($kodebarang);
+        
+        return view('So_barang/Form_ub_keluar',$data );
+    }
+    public function submit_ubah_barang_keluar($id)
+    { 
+       
         if ($this->validate([
-            'tgl_awal'  => 'required',
-            'tgl_akhir' => 'required',
-
+            'jumlahbarang' => 'required',
+             'keterangan' => 'required'
         ],[
-            'tgl_awal'=>[
-                'required' =>'Tanggal Awal Harus Disi'
+            'jumlahbarang'=>[
+                'required'=> 'Jumlah Barang Harus Di isi'
             ],
-            'tgl_akhir'=>[
-                'required' =>'Tanggal Akhir Harus Disi'
-            ],       
-        ])) {
+            'keterangan'=>[
+                'required'=> 'Keteranagn Barang Harus Di isi'
+            ]
+                     
+        ])) { 
             $data = [
-                'tgl_awal' => $this->request->getVar('tgl_awal'), // Corrected key for start date
-                'tgl_akhir' => $this->request->getVar('tgl_akhir'), 
+                
+                'jumlah' => $this->request->getVar('jumlahbarang'),
+                'keterangan' => $this->request->getVar('keterangan'),
+                              
             ];
-            $hasil['barang'] = $this->databarangModel->caridatamasuk($data);
-            return view('So_barang/V_LBmasuk',$hasil); 
+            $this->databarangModel->submitubahbarangkeluar($data,$id);
+            $this->session->setFlashdata('pesan', 'Data Berhasil Terupdate'); // Pastikan ini adalah string, bukan array
+            return redirect()->to('/databarang',);           
         }
-        // else
-        session()->setFlashdata('alert', 'Tanggal Awal dan Akhir Harus Sesuai');
+        session()->setFlashdata('pesan', 'Data Belum Terupdate');
+        // Ensure the validation object is passed correctly
         return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
     }
+
+  // ifitur lainya 
     public function cekbarangqa()
     { 
         $data['itemcount'] = $this->databarangModel->itemcount();
@@ -478,140 +660,7 @@ class Home extends BaseController
         // dd($data);
         return view('So_barang/V_cekQA',$data ); // Pass results to the view
     }
-    public function ubahbarang($kodebarang)
-    { 
-        
-        $data['masuk'] = $this->databarangModel->ambildatabarangubah($kodebarang);
-        return view('So_barang/Form_ubah_barang',$data );
-    }
-    public function submit_ubah_barang($id)
-    { 
-       
-        if ($this->validate([
-            'kodebarang' => "required|is_unique[databarang.kodebarang.id, id, {$id}]",
-            'namabarang' => 'required',
-            'satuan'     => 'required',
-            'jumlahbarang' => 'required',
-            'expired'    => 'required',
-            'coa'        => 'required',
-            'msds'       => 'required',
-        ],[
-            'kodebarang'=>[
-                'required' =>'Kode Barang Harus Di isi',
-                'is_unique'=>'Kode Barang Sudah digunakan'
-            ],
-            'namabarang'=>[
-                'required'=> 'Nama Barang Harus Di isi'
-            ],
-            'satuan'=>[
-                'required'=> 'Satuan Barang Harus Di isi'
-            ],
-            'jumlahbarang'=>[
-                'required'=> 'Jumlah Barang Harus Di isi'
-            ],
-            'expired'=>[
-                'required'=> 'Expired Barang Harus Di isi'
-            ],
-            'coa'=>[
-                'required'=> 'COA Barang Harus Di isi'
-            ],
-            'msds'=>[
-                'required'=> 'MSDS Barang Harus Di isi'
-            ],
-                     
-        ])) { // Perbaiki di sini
-            $data = [
-                'kodebarang' => $this->request->getVar('kodebarang'),
-                'namabarang' => $this->request->getVar('namabarang'),
-                'satuan' => $this->request->getVar('satuan'),
-                'jumlah' => $this->request->getVar('jumlahbarang'),
-                'expired' => $this->request->getVar('expired'),
-                'nama' => $this->request->getVar('nama'),
-                'coa' => $this->request->getVar('coa'),
-                'msds' => $this->request->getVar('msds'),
-                
-            ];
-            $this->databarangModel->submitubahbarang($data,$id);
-            $this->session->setFlashdata('pesan', 'Data Berhasil Terupdate'); // Pastikan ini adalah string, bukan array
-            return redirect()->to('/databarang',);           
-        }
-        session()->setFlashdata('pesan', 'Data Belum Terupdate');
-        // Ensure the validation object is passed correctly
-        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
-    }
-
-    public function ubahbarangmasuk($kodebarang)
-    { 
-        
-        $data['masuk'] = $this->databarangModel->dataubahbarangmasuk($kodebarang);
-        
-        return view('So_barang/Form_ub_masuk',$data );
-    }
-    public function submit_ubah_barang_masuk($id)
-    { 
-       
-        if ($this->validate([
-            'jumlahbarang' => 'required',
-        ],[
-            'jumlahbarang'=>[
-                'required'=> 'Jumlah Barang Harus Di isi'
-            ]
-                     
-        ])) { // Perbaiki di sini
-            $data = [
-                
-                'jumlah' => $this->request->getVar('jumlahbarang'),
-                              
-            ];
-            $this->databarangModel->submitubahbarangmasuk($data,$id);
-            $this->session->setFlashdata('pesan', 'Data Berhasil Terupdate'); // Pastikan ini adalah string, bukan array
-            return redirect()->to('/databarang',);           
-        }
-        session()->setFlashdata('pesan', 'Data Belum Terupdate');
-        // Ensure the validation object is passed correctly
-        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
-    }
-
-    public function submitnamabarang()
-    { 
-        if ($this->validate([
-            'namabarang' => 'required',
-        ],[
-            'namabarang'=>[
-                'required'=> 'Nama Harus Disi'
-            ]
-                     
-        ])) { // Perbaiki di sini
-            $data = [
-                
-                'namabarang' => $this->request->getVar('namabarang'),
-                              
-            ];
-            $this->databarangModel->submitnamabarang($data);
-            $this->session->setFlashdata('pesan', 'Data Berhasil Ditambahkan'); // Pastikan ini adalah string, bukan array
-            return redirect()->to('/tambah_data_barang');      
-        }
-        session()->setFlashdata('alert', 'Data Belum Ditambahkan');
-        // Ensure the validation object is passed correctly
-        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
-    }
-    public function daftarnamabarang(): string
-    { 
-        return view('So_barang/Form_nama_barang', );
-
-    }
-    public function hapusnamabarang(): string
-    { 
-        $data['barang'] = $this->databarangModel->caridaftarbarang();
-        return view('So_barang/V_list_nama_barang', $data);
-    }
-    public function deletedaftarnamabarang($id)
-    { 
-        $this->databarangModel->deletedaftarnamabarang($id);
-        session()->setFlashdata('pesan', 'Data berhasil dihapus');
-        return redirect()->to('/tambah_data_barang');
-    }
-    public function dashboardqakalkual()
+      public function dashboardqakalkual()
     { 
         $jumlahdata = $this->databarangModel->hitungbaranghabiskalkual();
         $jumlahdataed = $this->databarangModel->hitungbarangedkalkual();
@@ -627,7 +676,6 @@ class Home extends BaseController
         
         return view('So_barang/V_baranghabis',$data);
     }
-    
     public function barangedkalkual()
     { 
         $data['cekexpired'] = $this->databarangModel->cekexpired();

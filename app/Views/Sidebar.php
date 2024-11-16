@@ -12,10 +12,7 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li>
-                            <a href="/"><i class="fa fa-user-circle"></i>  Profile</a>
-                        </li>
-                        <?php if(in_groups('supervisor')) :?>
+                            <?php if(in_groups('supervisor')) :?>
                         <li>
                             <a href="/daftaruser"><i class="fa fa-user-circle"></i>  Kelola User</a>
                         </li>
@@ -35,7 +32,7 @@
                                         <li>
                                             <a href="/databarang" class="fa fa-tag"> Data Barang</a>
                                         </li>
-                                        <?php if(in_groups(['supervisor', 'admin',])) : ?>
+                                        <?php if(in_groups(['supervisor', 'admin_kalkual',])) : ?>
                                         <li>
                                             <a href="/laporanbarangmasuk" class="fa fa-tag"> Laporan Barang Masuk</a>
                                         </li>

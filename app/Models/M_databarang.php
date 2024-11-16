@@ -39,6 +39,41 @@ class M_databarang extends Model
         $builder->insert($data);
        
     }
+    public function ambildatabarangubah($kodebarang)
+    {
+        $builder = $this->db->table('databarang');
+        $builder->where('kodebarang', $kodebarang); //
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+    public function submitubahbarang($data,$id)
+    {
+        $builder = $this->db->table('databarang');
+        $builder->where('id', $id);
+        $builder->update($data);
+       
+    }
+    public function caridaftarbarang()
+    {
+        $builder = $this->db->table('daftarbarang');
+        $query = $builder->get();
+        return $query->getResultArray();
+       
+    }
+    public function submitnamabarang($data)
+    {
+        $builder = $this->db->table('daftarbarang');
+        $builder->insert($data);
+       
+    }
+    public function deletedaftarnamabarang($id)
+    {
+        $builder = $this->db->table('daftarbarang');
+        $builder->where('id', $id); //
+        $query = $builder->delete();
+        return $query ? true : false; // Indicate success or failure
+    }
+    // barang masuk
     public function ambildatabarangmasuk($kodebarang)
     {
         
@@ -68,6 +103,30 @@ class M_databarang extends Model
         // Return a response indicating success
         return $query ? true : false; // Indicate success or failure
     }
+    public function caridatamasuk($data)
+    {
+        // Mengasumsikan Anda sudah memiliki koneksi database yang disiapkan
+        $builder = $this->db->table('barangmasuk'); // Nama tabel yang sesuai
+        $builder->where('tanggal BETWEEN ' . $this->db->escape($data['tgl_awal']) . ' AND ' . $this->db->escape($data['tgl_akhir'])); // Filter tanggal
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+    public function dataubahbarangmasuk($kodebarang)
+    {
+        $builder = $this->db->table('barangmasuk');
+        $builder->where('kodebarang', $kodebarang); //
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+    public function submitubahbarangmasuk($data,$id)
+    {
+        $builder = $this->db->table('barangmasuk');
+        $builder->where('id', $id);
+        $builder->update($data);
+       
+    }
+
+    // barang keluar
     public function ambildatabarangkeluar($kodebarang)
     {
         
@@ -105,14 +164,21 @@ class M_databarang extends Model
         $query = $builder->get();
         return $query->getResultArray(); // Mengembalikan hasil sebagai array
     }
-    public function caridatamasuk($data)
+    public function dataubahbarangkeluar($kodebarang)
     {
-        // Mengasumsikan Anda sudah memiliki koneksi database yang disiapkan
-        $builder = $this->db->table('barangmasuk'); // Nama tabel yang sesuai
-        $builder->where('tanggal BETWEEN ' . $this->db->escape($data['tgl_awal']) . ' AND ' . $this->db->escape($data['tgl_akhir'])); // Filter tanggal
+        $builder = $this->db->table('barangkeluar');
+        $builder->where('kodebarang', $kodebarang); //
         $query = $builder->get();
         return $query->getResultArray();
     }
+    public function submitubahbarangkeluar($data,$id)
+    {
+        $builder = $this->db->table('barangkeluar');
+        $builder->where('id', $id);
+        $builder->update($data);
+       
+    }
+   // lainya 
     public function itemcount()
     {
         $builder = $this->db->table('databarang');
@@ -132,57 +198,7 @@ class M_databarang extends Model
                         ->orWhere('expired <=', date('Y-m-d', strtotime('+4 months')))
                         ->get()->getResultArray(); // Mengembalikan data barang yang expired
     }
-    
-    public function ambildatabarangubah($kodebarang)
-    {
-        $builder = $this->db->table('databarang');
-        $builder->where('kodebarang', $kodebarang); //
-        $query = $builder->get();
-        return $query->getResultArray();
-    }
-    public function submitubahbarang($data,$id)
-    {
-        $builder = $this->db->table('databarang');
-        $builder->where('id', $id);
-        $builder->update($data);
-       
-    }
-    public function dataubahbarangmasuk($kodebarang)
-    {
-        $builder = $this->db->table('barangmasuk');
-        $builder->where('kodebarang', $kodebarang); //
-        $query = $builder->get();
-        return $query->getResultArray();
-    }
-    public function submitubahbarangmasuk($data,$id)
-    {
-        $builder = $this->db->table('barangmasuk');
-        $builder->where('id', $id);
-        $builder->update($data);
-       
-    }
-
-    public function caridaftarbarang()
-    {
-        $builder = $this->db->table('daftarbarang');
-        $query = $builder->get();
-        return $query->getResultArray();
-       
-    }
-    public function submitnamabarang($data)
-    {
-        $builder = $this->db->table('daftarbarang');
-        $builder->insert($data);
-       
-    }
-    public function deletedaftarnamabarang($id)
-    {
-        $builder = $this->db->table('daftarbarang');
-        $builder->where('id', $id); //
-        $query = $builder->delete();
-        return $query ? true : false; // Indicate success or failure
-    }
-    public function lihatjumlah($kodebarang)
+       public function lihatjumlah($kodebarang)
     {
         $builder = $this->db->table('databarang');
         $builder->select('jumlah'); // Ambil hanya kolom jumlah
@@ -195,7 +211,6 @@ class M_databarang extends Model
         
         return $query->getResultArray(); // Indicate success or failure
     }
-
     public function hitungbaranghabiskalkual()
     {
         $builder = $this->db->table('databarang');

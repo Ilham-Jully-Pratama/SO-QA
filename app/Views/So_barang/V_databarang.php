@@ -36,7 +36,7 @@
                                         <th>MSDS</th>
                                         <th style="white-space: nowrap;">Tanggal Update</th>
                                         <th style="white-space: nowrap;">Nama</th>
-                                        <?php if(in_groups(['supervisor','admin'])) :?>
+                                        <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
                                         <th>Update</th>
                                         <th>Delete</th>
                                         <th colspan="2" class="text-center">Aksi</th>
@@ -62,7 +62,7 @@
                                         </td>
                                         <td style="white-space: nowrap;"><?= $dd['tanggal']; ?></td>
                                         <td style="white-space: nowrap;"><?= $dd['nama']; ?></td>
-                                        <?php if(in_groups(['supervisor','admin'])) :?>
+                                        <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
                                         <td>
                                             <a type="button" class="btn btn-info" href="<?= base_url('/ubahbarang' . $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a>     
                                         </td>

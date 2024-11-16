@@ -62,6 +62,14 @@
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Keterangan</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['keterangan']) ? (session('validation')['keterangan'] ? 'is-invalid' : '') : ''; ?>" type="text"name="keterangan" value="<?= $dd['keterangan']; ?>">
+                                                    <p class="help-block">keterangan </p>
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['keterangan']) ? session('validation')['keterangan'] : ''; ?></span>
+                                                    </small>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Nama</label>
                                                     <input class="form-control"name="nama" value="<?=user()-> username; ?>" readonly>
                                                     <p class="help-block">Nama PIC</p>

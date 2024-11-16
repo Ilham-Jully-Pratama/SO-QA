@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Form Ubah Barang Masuk </h1>
+                            <h1 class="page-header">Form Ubah Barang keluar </h1>
                         </div> 
                         <!-- /.col-lg-12 -->
                     </div>
@@ -13,14 +13,14 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Ubah Data Barang 
+                                    Ubah Data Barang Keluar
                                 </div>
                                 <div class="panel-body">
                                 <div id="flash2" data-flash="<?= esc(session()->getFlashdata('pesan')); ?>">
                                     <div class="row">
                                         <div class="col-lg-6">
                                         <?php foreach ($masuk as $dd) : ?>
-                                            <form role="form" action="<?= site_url('/submit_ubah_brg_masuk'.$dd['id']) ?>" method="post">
+                                            <form role="form" action="<?= site_url('/submit_ubah_barang_keluar'.$dd['id']) ?>" method="post">
                                                 <div class="form-group">
                                                     <label>Kode Barang</label>
                                                     <input class="form-control <?= session('validation') && isset(session('validation')['kodebarang']) ? (session('validation')['kodebarang'] ? 'is-invalid' : '') : ''; ?>" name="kodebarang" value="<?= $dd['kodebarang']; ?>" readonly>
@@ -54,29 +54,24 @@
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Tanggal Input </label>
-                                                    <input class="form-control <?= session('validation') && isset(session('validation')['tanggal']) ? (session('validation')['tanggal'] ? 'is-invalid' : '') : ''; ?>" type="date"name="tanggal" value="<?= $dd['tanggal_masuk']; ?>">
-                                                    <p class="help-block">Tanggal Input </p>
+                                                    <label>Expired</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['expired']) ? (session('validation')['expired'] ? 'is-invalid' : '') : ''; ?>" type="date"name="expired" value="<?= $dd['expired']; ?>"readonly>
+                                                    <p class="help-block">Expired barang </p>
                                                     <small>
-                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['tanggal']) ? session('validation')['tanggal'] : ''; ?></span>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['expired']) ? session('validation')['expired'] : ''; ?></span>
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <input class="form-control <?= session('validation') && isset(session('validation')['keterangan']) ? (session('validation')['keterangan'] ? 'is-invalid' : '') : ''; ?>" type="date"name="keterangan" value="<?= $dd['keterangan']; ?>">
-                                                    <p class="help-block">Keterangan </p>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['keterangan']) ? (session('validation')['keterangan'] ? 'is-invalid' : '') : ''; ?>" type="text"name="keterangan" value="<?= $dd['keterangan']; ?>">
+                                                    <p class="help-block">Keterangan</p>
                                                     <small>
                                                         <span class="text-danger"><?= session('validation') && isset(session('validation')['keterangan']) ? session('validation')['keterangan'] : ''; ?></span>
                                                     </small>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Nama</label>
-                                                    <input class="form-control"name="nama" value="<?=user()-> username; ?>" readonly>
-                                                    <p class="help-block">Nama PIC</p>
-                                                </div>
                                                 <button type="submit" id="tombolsubmit"class="btn btn-success">Submit Button</button>
                                                 <button type="reset" class="btn btn-danger">Reset Button</button>
-                                                <button type="button" class="btn btn-warning" onclick="window.location.href='<?= site_url('/databarang_adminqa'); ?>';">Kembali</button>
+                                                <button type="button" class="btn btn-warning" onclick="window.location.href='<?= site_url('/databarang'); ?>';">Kembali</button>
 
                                             </form>
                                         <?php endforeach; ?> 

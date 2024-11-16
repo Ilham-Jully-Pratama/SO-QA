@@ -44,7 +44,7 @@
                                             <th style="white-space: nowrap;">Nama Barang</th>
                                             <th style="white-space: nowrap;">Satuan</th>
                                             <th style="white-space: nowrap;">Jumlah</th>
-                                            <th style="white-space: nowrap;">Tanggal Masuk</th>
+                                            <th style="white-space: nowrap;">Tanggal Input </th>
                                             <th style="white-space: nowrap;">Keterangan</th>
                                             <th style="white-space: nowrap;">Nama</th>
                                             <th>Update</th>

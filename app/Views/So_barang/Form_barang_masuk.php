@@ -45,18 +45,27 @@
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Tanggal</label>
-                                                    <input class="form-control  <?= session('validation') ? (session('validation')['tanggal'] ? 'is-invalid' : '') : ''; ?>" type="date"name="tanggal">
+                                                    <label>Tanggal Input</label>
+                                                    <input class="form-control  <?= session('validation') && isset(session('validation')['tanggal']) ? (session('validation')['tanggal'] ? 'is-invalid' : '') : ''; ?>" type="date"name="tanggal">
                                                     <p class="help-block">Tanggal Input Barang keluar</p>
                                                     <small>
-                                                        <span class="text-danger"><?= session('validation') ? session('validation')['tanggal'] : ''; ?></span>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['tanggal']) ? session('validation')['tanggal'] : ''; ?></span>
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Expired</label>
                                                     <input class="form-control" type="date"name="expired" value="<?= $dd['expired']; ?>" readonly>
-                                                    <p class="help-block">Expired barang </p>
+                                                    <p class="help-block">Expired</p>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>Keterangan </label>
+                                                    <input class="form-control  <?= session('validation') && isset(session('validation')['keterangan']) ? (session('validation')['keterangan'] ? 'is-invalid' : '') : ''; ?>" type="text"name="keterangan">
+                                                    <p class="help-block">Keterangan</p>
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['keterangan']) ? session('validation')['keterangan'] : ''; ?></span>
+                                                    </small>
+                                                </div>
+                                                
                                                 <div class="form-group">
                                                     <label>Nama</label>
                                                     <input class="form-control"name="nama" value="<?=user()-> username; ?>" readonly>

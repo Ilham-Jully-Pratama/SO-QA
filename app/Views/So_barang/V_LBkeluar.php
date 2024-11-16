@@ -37,29 +37,31 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Kodebarang</th>
-                                        <th>Nama Barang</th>
-                                        <th>Satuan</th>
-                                        <th>Jumlah</th>
-                                        <th>Tanggal Input</th>
-                                        <th>Expired</th>
-                                        <th>Nama</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                                        <th  style="white-space: nowrap;">Kodebarang</th>
+                                        <th  style="white-space: nowrap;">Nama Barang</th>
+                                        <th  style="white-space: nowrap;">Satuan</th>
+                                        <th  style="white-space: nowrap;">Jumlah</th>
+                                        <th  style="white-space: nowrap;">Tanggal Input</th>
+                                        <th  style="white-space: nowrap;">Expired</th>
+                                        <th  style="white-space: nowrap;">Keterangan</th>
+                                        <th  style="white-space: nowrap;">Nama</th>
+                                        <th  style="white-space: nowrap;">Update</th>
+                                        <th  style="white-space: nowrap;">Delete</th>
                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php foreach ($barang as $dd) : ?>
                                     <tr class="odd gradeX">
-                                        <td><?= $dd['kodebarang']; ?></td>
-                                        <td><?= $dd['namabarang']; ?></td>
-                                        <td><?= $dd['satuan']; ?></td>
-                                        <td><?= $dd['jumlah']; ?></td>
-                                        <td><?= $dd['tanggal']; ?></td>
-                                        <td><?= $dd['expired']; ?></td>
-                                        <td><?= $dd['nama']; ?></td>
-                                        <td><a type="button" data-toggle="modal" class="btn btn-info" data-target="#modalkode" data-kode="<?php echo $dd['kodebarang']; ?>" data-nama="<?php echo $dd['namabarang']; ?>" data-satuan="<?php echo $dd['satuan']; ?>" data-jumlah="<?php echo $dd['jumlah']; ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-solid fa-file" aria-hidden="true"></i></a></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['kodebarang']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['namabarang']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['satuan']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['jumlah']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['tanggal']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['expired']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['keterangan']; ?></td>
+                                        <td  style="white-space: nowrap;"><?= $dd['nama']; ?></td>
+                                        <td><a type="button" class="btn btn-info" href="<?= base_url('/ubah_barang_keluar' . $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                         <td>
                                             <form action="<?= site_url('/deletebarangkeluar'.$dd['id']) ?>" method="post">
                                                 

@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>Kodebarang</th>
                                         <th style="white-space: nowrap;">Nama Barang</th>
+                                        <th>Merek</th>
                                         <th>Satuan</th>
                                         <th>Jumlah</th>
                                         <th>Expired</th>
@@ -51,6 +52,7 @@
                                     <tr class="odd gradeX">
                                         <td style="white-space: nowrap;"><?= $dd['kodebarang']; ?></td>
                                         <td style="white-space: nowrap;"><?= $dd['namabarang']; ?></td>
+                                        <td style="white-space: nowrap;"><?= $dd['merek']; ?></td>
                                         <td><?= $dd['satuan']; ?></td>
                                         <td><?= $dd['jumlah']; ?></td>
                                         <td style="white-space: nowrap;"><?= $dd['expired']; ?></td>

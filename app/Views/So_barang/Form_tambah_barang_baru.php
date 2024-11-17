@@ -67,6 +67,15 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu
                                                     
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Merek</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['merek']) ? (session('validation')['merek'] ? 'is-invalid' : '') : ''; ?>" name="merek" type="text">
+                                                    <p class="help-block">Merek Barang </p>
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['merek']) ? session('validation')['merek'] : ''; ?></span>
+                                                    </small>
+                                                    
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Expired</label>
                                                     <input class="form-control <?= session('validation') && isset(session('validation')['expired']) ? (session('validation')['expired'] ? 'is-invalid' : '') : ''; ?>" type="date"name="expired">
                                                     <p class="help-block">Expired barang </p>

@@ -149,6 +149,7 @@ class Home extends BaseController
             'msds'       => 'required',
             'tanggal'    => 'required',
             'merek'    => 'required',
+            'tanggal_kedatangan'    => 'required',
         ],[
             'kodebarang'=>[
                 'required' =>'Kode Barang Harus Di isi',
@@ -178,6 +179,9 @@ class Home extends BaseController
             'merek'=>[
                 'required'=> 'Merek Barang Harus Di isi'
             ],
+            'tanggal_kedatangan'=>[
+                'required'=> 'Harus Di isi'
+            ],
                      
         ])) { // Perbaiki di sini
             $data = [
@@ -190,7 +194,8 @@ class Home extends BaseController
                 'coa' => $this->request->getVar('coa'),
                 'msds' => $this->request->getVar('msds'),
                 'tanggal' => $this->request->getVar('tanggal'),
-                'merek' => $this->request->getVar('tanggal'),
+                'merek' => $this->request->getVar('merek'),
+                'tanggal_datang' => $this->request->getVar('tanggal_kedatangan'),
                 
             ];
             $this->databarangModel->submitbarangbaru($data);

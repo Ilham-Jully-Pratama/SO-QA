@@ -105,6 +105,11 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu
                                                     <p class="help-block">Tanggal Input Data Baru </p>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Tanggal Kedatangan</label>
+                                                    <input class="form-control" type="datetime-local" name="tanggal_kedatangan" id="tanggalInput" >
+                                                    <p class="help-block">Tanggal Datang Barang </p>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Nama</label>
                                                     <input class="form-control"name="nama" value="<?=user()-> username; ?>" readonly>
                                                     <p class="help-block">Nama PIC</p>

@@ -27,7 +27,7 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead class="text-center">
                                     <tr>
-                                        <th>Kodebarang</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;" >Kodebarang</th>
                                         <th style="white-space: nowrap;">Nama Barang</th>
                                         <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Merek</th>
                                         <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Satuan</th>

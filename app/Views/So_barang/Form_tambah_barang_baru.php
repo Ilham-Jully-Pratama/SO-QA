@@ -60,7 +60,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Jumlah</label>
-                                                    <input class="form-control <?= session('validation') && isset(session('validation')['jumlahbarang']) ? (session('validation')['jumlahbarang'] ? 'is-invalid' : '') : ''; ?>" name="jumlahbarang" type="number" min="0" step="1">
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['jumlahbarang']) ? (session('validation')['jumlahbarang'] ? 'is-invalid' : '') : ''; ?>" name="jumlahbarang" type="number" min="1">
                                                     <p class="help-block">Jumlah barang </p>
                                                     <small>
                                                         <span class="text-danger"><?= session('validation') && isset(session('validation')['jumlahbarang']) ? session('validation')['jumlahbarang'] : ''; ?></span>

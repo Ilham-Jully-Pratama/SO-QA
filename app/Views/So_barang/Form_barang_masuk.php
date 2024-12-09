@@ -34,7 +34,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label> Merek </label>
-                                                    <input class="form-control" name="namabarang" value="<?= $dd['merek']; ?>" readonly>
+                                                    <input class="form-control" name="merek" value="<?= $dd['merek']; ?>" readonly>
                                                     <p class="help-block">Masukan Nama barang </p>
                                                 </div>
                                                 <div class="form-group">

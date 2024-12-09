@@ -53,7 +53,8 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu
                                                         <option value="">Pilih Satuan</option> 
                                                         <option >ml</option>
                                                         <option >Pcs</option>
-                                                        <option >Vial</option> 
+                                                        <option >Vial</option>
+                                                        <option >Ampul</option> 
                                                     </select>
                                                     <span class="text-danger"><?= session('validation') && isset(session('validation')['satuan']) ? session('validation')['satuan'] : ''; ?></span>
                                                 </div>

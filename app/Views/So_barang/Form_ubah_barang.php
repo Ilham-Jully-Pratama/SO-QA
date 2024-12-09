@@ -38,6 +38,14 @@
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label> Merek Barang </label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['merek']) ? (session('validation')['merek'] ? 'is-invalid' : '') : ''; ?>" name="merek" value="<?= $dd['merek']; ?>">
+                                                    <p class="help-block">Masukan Nama barang </p>
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['merek']) ? session('validation')['merek'] : ''; ?></span>
+                                                    </small>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Satuan</label>
                                                     <input class="form-control <?= session('validation') && isset(session('validation')['satuan']) ? (session('validation')['satuan'] ? 'is-invalid' : '') : ''; ?>" name="satuan" value="<?= $dd['satuan']; ?>">
                                                     <small>
@@ -50,6 +58,14 @@
                                                     <p class="help-block">Jumlah barang </p>
                                                     <small>
                                                         <span class="text-danger"><?= session('validation') && isset(session('validation')['jumlahbarang']) ? session('validation')['jumlahbarang'] : ''; ?></span>
+                                                    </small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tanggal Kedatangan</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['tanggal_kedatangan']) ? (session('validation')['tanggal_kedatangan'] ? 'is-invalid' : '') : ''; ?>"name="tanggal_kedatangan" type="date"value="<?= $dd['tanggal_datang']; ?>">
+                                                    <p class="help-block">Jumlah barang </p>
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['tanggal_kedatanagan']) ? session('validation')['tanggal_kedatangan'] : ''; ?></span>
                                                     </small>
                                                 </div>
                                                 <div class="form-group">

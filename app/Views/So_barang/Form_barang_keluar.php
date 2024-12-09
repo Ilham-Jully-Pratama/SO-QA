@@ -32,6 +32,11 @@
                                                     <p class="help-block">Masukan Nama barang </p>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label> Merek </label>
+                                                    <input class="form-control" name="merek" value="<?= $dd['merek']; ?>" readonly>
+                                                    <p class="help-block">Masukan Merek barang </p>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Satuan</label>
                                                     <input class="form-control" name="satuan" value="<?= $dd['satuan']; ?>" readonly>
                                                 </div>
@@ -54,6 +59,14 @@
                                                     <p class="help-block">Tanggal Input</p>
                                                     <small>
                                                         <span class="text-danger"><?= session('validation') ? session('validation')['tanggal'] : ''; ?></span>
+                                                    </small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Keterangan</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['keterangan']) ? (session('validation')['keterangan'] ? 'is-invalid' : '') : ''; ?>" name="keterangan" type="text">
+                                                    <p class="help-block">Keterangan </p>
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['keterangan']) ? session('validation')['keterangan'] : ''; ?></span>
                                                     </small>
                                                 </div>
                                                 <div class="form-group">

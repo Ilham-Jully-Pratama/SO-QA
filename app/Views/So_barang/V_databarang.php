@@ -29,14 +29,15 @@
                                     <tr>
                                         <th>Kodebarang</th>
                                         <th style="white-space: nowrap;">Nama Barang</th>
-                                        <th>Merek</th>
-                                        <th>Satuan</th>
-                                        <th>Jumlah</th>
-                                        <th>Expired</th>
-                                        <th>COA</th>
-                                        <th>MSDS</th>
-                                        <th style="white-space: nowrap;">Tanggal Update</th>
-                                        <th style="white-space: nowrap;">Nama</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Merek</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Satuan</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Jumlah</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Expired</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">COA</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">MSDS</th>
+                                        <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Tanggal Update</th>
+                                        <th style="white-space: nowrap; text-align: center; vertical-align: middle;">Tanggal Kedatangan</th>
+                                        <th style="white-space: nowrap; text-align: center; vertical-align: middle;">Nama</th>
                                         <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
                                         <th>Update</th>
                                         <th>Delete</th>
@@ -50,20 +51,21 @@
                                 <tbody>
                                 <?php foreach ($barang as $dd) : ?>
                                     <tr class="odd gradeX">
-                                        <td style="white-space: nowrap;"><?= $dd['kodebarang']; ?></td>
-                                        <td style="white-space: nowrap;"><?= $dd['namabarang']; ?></td>
-                                        <td style="white-space: nowrap;"><?= $dd['merek']; ?></td>
-                                        <td><?= $dd['satuan']; ?></td>
-                                        <td><?= $dd['jumlah']; ?></td>
-                                        <td style="white-space: nowrap;"><?= $dd['expired']; ?></td>
-                                        <td style="white-space: nowrap;">
+                                        <td style="white-space: nowrap; text-align: center; vertical-align: middle;"><?= $dd['kodebarang']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['namabarang']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['merek']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['satuan']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['jumlah']; ?></td>
+                                        <td style="white-space: nowrap; text-align: center; vertical-align: middle;"><?= $dd['expired']; ?></td>
+                                        <td style="white-space: nowrap; text-align: center; vertical-align: middle;">
                                             <a href="<?= $dd['coa']; ?>"><?= esc('Lihat COA'); ?></a>
                                         </td>
-                                        <td style="white-space: nowrap;">
+                                        <td style="white-space: nowrap; text-align: center; vertical-align: middle;">
                                             <a href="<?= $dd['msds']; ?>"><?= esc('Lihat MSDS'); ?></a>
                                         </td>
-                                        <td style="white-space: nowrap;"><?= $dd['tanggal']; ?></td>
-                                        <td style="white-space: nowrap;"><?= $dd['nama']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['tanggal']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['tanggal_datang']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['nama']; ?></td>
                                         <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
                                         <td>
                                             <a type="button" class="btn btn-info" href="<?= base_url('/ubahbarang' . $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a>     

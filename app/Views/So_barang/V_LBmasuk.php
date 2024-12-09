@@ -40,6 +40,7 @@
                                             <th style="white-space: nowrap;">Kodebarang</th>
                                             <th style="white-space: nowrap;">Nama Barang</th>
                                             <th style="white-space: nowrap;">Satuan</th>
+                                            <th style="white-space: nowrap;">merek</th>
                                             <th style="white-space: nowrap;">Jumlah</th>
                                             <th style="white-space: nowrap;">Tanggal Masuk</th>
                                             <th style="white-space: nowrap;">Expired</th>
@@ -56,6 +57,7 @@
                                             <td style="white-space: nowrap;"><?= $dd['kodebarang']; ?></td>
                                             <td style="white-space: nowrap;"><?= $dd['namabarang']; ?></td>
                                             <td style="white-space: nowrap;"><?= $dd['satuan']; ?></td>
+                                            <td style="white-space: nowrap;"><?= $dd['merek']; ?></td>
                                             <td style="white-space: nowrap;"><?= $dd['jumlah']; ?></td>
                                             <td style="white-space: nowrap;"><?= $dd['tanggal']; ?></td>
                                             <td style="white-space: nowrap;"><?= $dd['expired']; ?></td>

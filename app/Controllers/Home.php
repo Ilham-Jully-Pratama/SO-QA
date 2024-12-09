@@ -223,6 +223,7 @@ class Home extends BaseController
             'expired'    => 'required',
             'coa'        => 'required',
             'msds'       => 'required',
+            'merek'       => 'required',
         ],[
             'kodebarang'=>[
                 'required' =>'Kode Barang Harus Di isi',
@@ -246,6 +247,12 @@ class Home extends BaseController
             'msds'=>[
                 'required'=> 'MSDS Barang Harus Di isi'
             ],
+            'merek'=>[
+                'required'=> 'Merek Barang Harus Di isi'
+            ],
+            'tanggal_kedatangan'=>[
+                'required'=> 'Merek Barang Harus Di isi'
+            ],
                      
         ])) { // Perbaiki di sini
             $data = [
@@ -257,6 +264,8 @@ class Home extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'coa' => $this->request->getVar('coa'),
                 'msds' => $this->request->getVar('msds'),
+                'merek' => $this->request->getVar('merek'),
+                'tanggal_datang' => $this->request->getVar('tanggal_kedatangan'),
                 
             ];
             $this->databarangModel->submitubahbarang($data,$id);
@@ -351,8 +360,9 @@ class Home extends BaseController
                 'jumlah' => $this->request->getVar('jumlahbarang'),
                 'expired' => $this->request->getVar('expired'),
                 'nama' => $this->request->getVar('nama'),
+                'merek' => $this->request->getVar('merek'),
                 'tanggal' => $this->request->getVar('tanggal'),
-                'keterangan' => $this->request->getVar('tanggal'),
+                'keterangan' => $this->request->getVar('keterangan'),
             ];
             $this->databarangModel->submitbarangmasuk($data);
             session()->setFlashdata('pesan', 'Data berhasil ditambah');
@@ -454,12 +464,16 @@ class Home extends BaseController
         if ($this->validate([
             'jumlahbarang' => 'required',
             'tanggal'      => 'required',
+            'keterangan'      => 'required',
         ],[
             'jumlahbarang'=>[
                 'required' =>'jumlah barang harus diisi'
             ],
             'tanggal'=>[
                 'required' =>'tanggal harus diisi'
+            ],
+            'keterangan'=>[
+                'required' =>'keterangan harus diisi'
             ],
             
 
@@ -472,6 +486,8 @@ class Home extends BaseController
                 'expired' => $this->request->getVar('expired'),
                 'nama' => $this->request->getVar('nama'),
                 'tanggal' => $this->request->getVar('tanggal'),
+                'keterangan' => $this->request->getVar('keterangan'),
+                'merek' => $this->request->getVar('merek'),
             ];
                 $jumlahInput = intval($this->request->getVar('jumlahbarang'));
                 // dd($jumlahInput); // Mengonversi input menjadi integer

@@ -39,6 +39,11 @@
                                                     </small>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label> Merek </label>
+                                                    <input class="form-control " name="merek" value="<?= $dd['merek']; ?>"readonly>
+                                                    <p class="help-block">Masukan Merek barang </p>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Satuan</label>
                                                     <input class="form-control <?= session('validation') && isset(session('validation')['satuan']) ? (session('validation')['satuan'] ? 'is-invalid' : '') : ''; ?>" name="satuan" value="<?= $dd['satuan']; ?>"readonly>
                                                     <small>

@@ -21,10 +21,14 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <a type="button" class="btn btn-success" href="<?= base_url('/tambah_data_barang')?>" id="buttontambahbarang" style="margin:auto;height:20%;margin-bottom:10px;"><i class="fa fa-plus" aria-hidden="true"></i>Tambah Data </a>
+                        <div style="display: flex;">
+                            <a type="button" class="btn btn-success" href="<?= base_url('/tambah_data_barang')?>" id="buttontambahbarang" style="height:20%;margin-bottom:10px;"><i class="fa fa-plus" aria-hidden="true"></i>Tambah Data </a>
+                            <input type="text" style="height:20%;margin-bottom:10px; margin-left:10px;" id="searchInput" placeholder=" Cari Data">
+                        </div>
+                       
 
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover" id="tabel-databarang">
                                 <thead class="text-center">
                                     <tr>
                                         <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Kodebarang</th>
@@ -120,7 +124,38 @@
         });
     });
 </script>
+<script>
+        // Ambil elemen input dan tabel
+        const searchInput = document.getElementById('searchInput');
+        const table = document.getElementById('tabel-databarang');
+        const rows = table.getElementsByTagName('tr');
 
+        // Fungsi untuk mencari data di tabel
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase(); // Ambil nilai pencarian dan ubah ke lowercase
+
+            // Loop untuk setiap baris tabel
+            for (let i = 1; i < rows.length; i++) { // Mulai dari i = 1 untuk melewati header
+                const cells = rows[i].getElementsByTagName('td');
+                let found = false;
+
+                // Loop untuk setiap sel di baris
+                for (let j = 0; j < cells.length; j++) {
+                    const cellText = cells[j].textContent.toLowerCase();
+                    if (cellText.indexOf(filter) > -1) {
+                        found = true; // Jika ditemukan, set flag found menjadi true
+                    }
+                }
+
+                // Tampilkan atau sembunyikan baris tergantung apakah ditemukan atau tidak
+                if (found) {
+                    rows[i].style.display = ''; // Tampilkan baris
+                } else {
+                    rows[i].style.display = 'none'; // Sembunyikan baris
+                }
+            }
+        });
+    </script>
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

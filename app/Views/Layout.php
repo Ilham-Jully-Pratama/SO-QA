@@ -33,6 +33,26 @@
             .is-invalid {
                border-color: #dc3545; /* Red border */
            }
+           
+           #searchInput {
+            width: 50%; /* Menyesuaikan lebar dengan elemen container (misal, 100% dari lebar elemen parent) */
+            max-width: 130px; /* Membatasi lebar maksimal input */
+            height: 35px; /* Menentukan tinggi input */
+            padding: 8px 16px; /* Padding di dalam input untuk jarak teks dengan sisi */
+            border-radius: 10px; /* Sudut melengkung pada input */
+            border: 1px solid #ccc; /* Warna dan tipe border */
+            font-size: 14px; /* Ukuran font */
+            box-sizing: border-box; /* Agar padding tidak menambah ukuran lebar */
+            transition: border-color 0.3s ease; /* Efek transisi pada border */
+        }
+
+        /* Menambahkan efek focus ketika input diklik */
+        #searchInput:focus {
+            border-color: #007BFF; /* Ganti warna border saat input fokus */
+            outline: none; /* Menghilangkan outline default */
+        }
+
+
         </style>
         <script src="<?= base_url() ?>/js/jquery.min.js"></script>
         <script src="<?= base_url() ?>/js/metisMenu.min.js"></script>

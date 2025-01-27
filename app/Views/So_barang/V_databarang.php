@@ -9,9 +9,9 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <div id="flash" data-flash="<?= esc(session()->getFlashdata('pesan')); ?>">
-        <div id="flash2" data-flash="<?= esc(session()->getFlashdata('alert')); ?>">
-        </div>
+        <div id="flash" data-flash="<?= esc(session()->getFlashdata('pesan')); ?>"> </div>
+        <div id="flash2" data-flash="<?= esc(session()->getFlashdata('alert')); ?>"> </div>
+        
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
@@ -25,8 +25,6 @@
                             <a type="button" class="btn btn-success" href="<?= base_url('/tambah_data_barang')?>" id="buttontambahbarang" style="height:20%;margin-bottom:10px;"><i class="fa fa-plus" aria-hidden="true"></i>Tambah Data </a>
                             <input type="text" style="height:20%;margin-bottom:10px; margin-left:10px;" id="searchInput" placeholder=" Cari Data">
                         </div>
-                       
-
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover" id="tabel-databarang">
                                 <thead class="text-center">
@@ -49,7 +47,6 @@
                                         <?php else: ?>
                                         <th>Aksi</th> <!-- Tampilkan hanya untuk peran lain -->
                                         <?php endif ?>
-        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,8 +96,8 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-    </div>
     <!-- /.container-fluid -->
+    </div>
 </div>
 <script>
     // Ambil semua tombol hapus
@@ -124,7 +121,7 @@
         });
     });
 </script>
-<script>
+<!-- <script>
         // Ambil elemen input dan tabel
         const searchInput = document.getElementById('searchInput');
         const table = document.getElementById('tabel-databarang');
@@ -155,7 +152,37 @@
                 }
             }
         });
-    </script>
+</script> -->
+<script> 
+    $(document).ready(function() {
+    var table = $('#tabel-databarang').DataTable({
+        "searching": false,  // Nonaktifkan pencarian default DataTables
+        "paging": true,      // Aktifkan pagination
+        "lengthChange": true // Izinkan perubahan jumlah baris per halaman
+    });
+
+    // Fungsi untuk pencarian kustom yang akan mencari di seluruh tabel
+    $('#searchInput').on('keyup', function() {
+        var searchTerm = this.value.toLowerCase(); // Ambil kata kunci pencarian
+
+        // Looping setiap baris dalam tabel
+        $('#tabel-databarang tbody tr').each(function() {
+            var row = $(this);  // Ambil baris
+            var rowText = row.text().toLowerCase(); // Ambil teks seluruh baris
+
+            // Cek apakah rowText mengandung kata pencarian
+            if (rowText.indexOf(searchTerm) !== -1) {
+                row.show();  // Tampilkan baris jika ditemukan
+            } else {
+                row.hide();  // Sembunyikan baris jika tidak ditemukan
+            }
+        });
+
+        // Redraw tabel untuk mereset pagination setelah pencarian
+        table.draw();
+    });
+});
+</script>
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

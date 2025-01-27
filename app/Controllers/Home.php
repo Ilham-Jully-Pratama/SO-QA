@@ -714,6 +714,12 @@ class Home extends BaseController
         
         return view('Halaman_Error',);
     }
+    public function homepage()
+    { 
+        
+        
+        return view('Homepage',);
+    }
 }
 
 

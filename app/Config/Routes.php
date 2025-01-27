@@ -49,6 +49,8 @@ $routes->get('/dashboardqakalkual', 'Home::dashboardqakalkual',['filter'=>'role:
 $routes->get('/baranghabiskalkual', 'Home::baranghabiskalkual',['filter'=>'role:supervisor,admin_kalkual']);
 $routes->get('/barangedkalkual', 'Home::barangedkalkual',['filter'=>'role:supervisor,admin_kalkual']);
 $routes->get('/halamanerror', 'Home::halamanerror',);
+$routes->get('/Homepage', 'Home::homepage',);
+
 
 // admin QA ------------------------------------------------------- admin QA-------------------------------------------------
 $routes->get('/databarangadminqa', 'Admin_QA::databarang',);

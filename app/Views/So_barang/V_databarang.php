@@ -121,68 +121,6 @@
         });
     });
 </script>
-<!-- <script>
-        // Ambil elemen input dan tabel
-        const searchInput = document.getElementById('searchInput');
-        const table = document.getElementById('tabel-databarang');
-        const rows = table.getElementsByTagName('tr');
-
-        // Fungsi untuk mencari data di tabel
-        searchInput.addEventListener('keyup', function() {
-            const filter = searchInput.value.toLowerCase(); // Ambil nilai pencarian dan ubah ke lowercase
-
-            // Loop untuk setiap baris tabel
-            for (let i = 1; i < rows.length; i++) { // Mulai dari i = 1 untuk melewati header
-                const cells = rows[i].getElementsByTagName('td');
-                let found = false;
-
-                // Loop untuk setiap sel di baris
-                for (let j = 0; j < cells.length; j++) {
-                    const cellText = cells[j].textContent.toLowerCase();
-                    if (cellText.indexOf(filter) > -1) {
-                        found = true; // Jika ditemukan, set flag found menjadi true
-                    }
-                }
-
-                // Tampilkan atau sembunyikan baris tergantung apakah ditemukan atau tidak
-                if (found) {
-                    rows[i].style.display = ''; // Tampilkan baris
-                } else {
-                    rows[i].style.display = 'none'; // Sembunyikan baris
-                }
-            }
-        });
-</script> -->
-<script> 
-    $(document).ready(function() {
-    var table = $('#tabel-databarang').DataTable({
-        "searching": false,  // Nonaktifkan pencarian default DataTables
-        "paging": true,      // Aktifkan pagination
-        "lengthChange": true // Izinkan perubahan jumlah baris per halaman
-    });
-
-    // Fungsi untuk pencarian kustom yang akan mencari di seluruh tabel
-    $('#searchInput').on('keyup', function() {
-        var searchTerm = this.value.toLowerCase(); // Ambil kata kunci pencarian
-
-        // Looping setiap baris dalam tabel
-        $('#tabel-databarang tbody tr').each(function() {
-            var row = $(this);  // Ambil baris
-            var rowText = row.text().toLowerCase(); // Ambil teks seluruh baris
-
-            // Cek apakah rowText mengandung kata pencarian
-            if (rowText.indexOf(searchTerm) !== -1) {
-                row.show();  // Tampilkan baris jika ditemukan
-            } else {
-                row.hide();  // Sembunyikan baris jika tidak ditemukan
-            }
-        });
-
-        // Redraw tabel untuk mereset pagination setelah pencarian
-        table.draw();
-    });
-});
-</script>
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

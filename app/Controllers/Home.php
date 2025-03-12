@@ -117,16 +117,21 @@ class Home extends BaseController
     }
     public function databarang(): string
     {
-        
-        // You can now use the model in your methods
-        $data['barang'] = $this->databarangModel->ambildatabarang();
-        $data['title'] = "Data Barang Kalkual";
-        $data['barang'] = $this->databarangModel->paginate(4);
-        $data['pager'] = $this->databarangModel->pager;
+        $katakunci = $this->request->getGet('katakunci');
 
+        if ($katakunci) {
+            $cari = $this->databarangModel->cari($katakunci); // Eksekusi query pencarian
+        } else {
+            $cari = $this->databarangModel->paginate(4); // Ambil semua data dengan pagination
+        }
         
-        // Return a view or process the data as needed
-        return view('So_barang/V_databarang', $data,);
+        $data['katakunci'] = $katakunci;
+        $data['title'] = "Data Barang Kalkual";
+        $data['barang'] = $cari; // Simpan hasil pencarian atau semua data
+        $data['pager'] = $this->databarangModel->pager;
+        
+        // Return view dengan data yang benar
+        return view('So_barang/V_databarang', $data);
     }
     public function tambah_data_barang(): string
     {

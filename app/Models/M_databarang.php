@@ -230,6 +230,12 @@ class M_databarang extends Model
                         ->orWhere('expired <=', date('Y-m-d', strtotime('+4 months')))
                         ->countAllResults(); // Mengembalikan data barang yang expired
     }
+    public function cari($katakunci, $perPage = 4)
+{
+    return $this->like('namabarang', $katakunci)->paginate($perPage);
+}
+
+    
 }
 
 

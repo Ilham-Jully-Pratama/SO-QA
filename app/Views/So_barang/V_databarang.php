@@ -22,13 +22,16 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="d-flex">
-                                <a class="btn btn-success d-flex align-items-center" href="<?= base_url('/tambah_data_barang')?>" id="buttontambahbarang" style="margin: 6px;">
+                                <a class="btn btn-success" href="<?= base_url('/tambah_data_barang')?>" id="buttontambahbarang" style="margin: 6px;">
                                     <i class="fa fa-plus"></i> Tambah Data
                                 </a>
-                                <form action="<?= site_url('/databarang') ?>" method="get" class="d-flex gap-2"> 
-                                    <input type="text" class="form-control" name="katakunci" placeholder="Cari" style="width: 200px; margin: 6px;">
-                                    <button class="btn btn-warning" type="submit"  style="margin: 6px;">Cari</button>
-                                </form>
+                        </div>
+                        <div>
+                            <form action="<?= site_url('/databarang') ?>" method="get"> 
+                                <input type="text" class="form-control" name="katakunci" placeholder="Cari" style="width: 200px; margin: 6px;">
+                                <button class="btn btn-warning" type="submit"  style="margin: 6px;">Cari</button>
+                            </form>
+                            
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover" id="tabel-databarang">
@@ -93,6 +96,10 @@
                             </table>
                             <?= $pager->links()?>
                         </div>
+                        <a class="btn btn-danger" href="<?= base_url('/printdatabarang')?>" id="buttontambahbarang" style="margin: 6px;"
+                        target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-print"></i> Print
+                        </a>
                     </div>
                     <!-- /.panel-body -->
                 </div>

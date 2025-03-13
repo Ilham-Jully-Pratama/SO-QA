@@ -231,9 +231,9 @@ class M_databarang extends Model
                         ->countAllResults(); // Mengembalikan data barang yang expired
     }
     public function cari($katakunci, $perPage = 4)
-{
-    return $this->like('namabarang', $katakunci)->paginate($perPage);
-}
+    {
+        return $this->like('namabarang', $katakunci)->paginate($perPage);
+    }   
 
     
 }

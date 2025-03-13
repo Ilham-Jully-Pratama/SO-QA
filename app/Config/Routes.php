@@ -50,6 +50,7 @@ $routes->get('/baranghabiskalkual', 'Home::baranghabiskalkual',['filter'=>'role:
 $routes->get('/barangedkalkual', 'Home::barangedkalkual',['filter'=>'role:supervisor,admin_kalkual']);
 $routes->get('/halamanerror', 'Home::halamanerror',);
 $routes->get('/Homepage', 'Home::homepage',);
+$routes->get('/printdatabarang', 'Home::cetakdatabarang',);
 
 
 // admin QA ------------------------------------------------------- admin QA-------------------------------------------------

@@ -4,17 +4,20 @@ namespace App\Controllers;
 
 use App\Models\M_databarang; // Add this line to import the model
 use App\Controllers\BaseController;
+use Dompdf\Dompdf;
 class Home extends BaseController
 {
 
-    protected $databarangModel; // Add this property
+    protected $databarangModel;
+    protected $dompdf;  // Add this property
     protected $session; // Deklarasi properti session
     protected $validation;
     public function __construct()
     {
-        $this->databarangModel = new M_databarang(); // Initialize the model
+        $this->databarangModel = new M_databarang();
         $this->session = \Config\Services::session();
-        $this->validation = \Config\Services::validation(); // Correct way to load validation service
+        $this->validation = \Config\Services::validation();
+        // Correct way to load validation service
     }
 
     public function index(): string
@@ -118,13 +121,11 @@ class Home extends BaseController
     public function databarang(): string
     {
         $katakunci = $this->request->getGet('katakunci');
-
         if ($katakunci) {
             $cari = $this->databarangModel->cari($katakunci); // Eksekusi query pencarian
         } else {
             $cari = $this->databarangModel->paginate(4); // Ambil semua data dengan pagination
         }
-        
         $data['katakunci'] = $katakunci;
         $data['title'] = "Data Barang Kalkual";
         $data['barang'] = $cari; // Simpan hasil pencarian atau semua data
@@ -132,6 +133,17 @@ class Home extends BaseController
         
         // Return view dengan data yang benar
         return view('So_barang/V_databarang', $data);
+    }
+    public function cetakdatabarang()
+    {
+        $data['barang'] = $this->databarangModel->ambildatabarang();
+        $dompdf = new Dompdf();
+        $html= view('So_barang/V_Cetak_databarang', $data);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream('Data Barang Kalkual.pdf', array("Attachment" => false));
+
     }
     public function tambah_data_barang(): string
     {

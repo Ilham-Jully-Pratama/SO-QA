@@ -49,7 +49,7 @@
                                         <th class="text-nowrap">Nama Barang</th>
                                         <th class="text-nowrap">Satuan</th>
                                         <th class="text-nowrap">Jumlah</th>
-                                        <th class="text-nowrap">Tanggal Update</th>
+                                        <th class="text-nowrap">Expired</th>
                                         <th class="text-nowrap">Tanggal Kedatangan</th>
                                         <th class="text-nowrap">Nama</th>
                                     </tr>
@@ -61,7 +61,7 @@
                                             <td class="text-nowrap"><?= esc($dd['namabarang']); ?></td>
                                             <td><?= esc($dd['satuan']); ?></td>
                                             <td><?= esc($dd['jumlah']); ?></td>
-                                            <td class="text-nowrap"><?= esc($dd['tanggal']); ?></td>
+                                            <td class="text-nowrap"><?= esc($dd['expired']); ?></td>
                                             <td class="text-nowrap"><?= esc($dd['tanggal_datang']); ?></td>
                                             <td class="text-nowrap"><?= esc($dd['nama']); ?></td>
                                         </tr>

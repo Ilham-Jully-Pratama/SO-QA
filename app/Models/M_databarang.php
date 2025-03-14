@@ -234,8 +234,18 @@ class M_databarang extends Model
     {
         return $this->like('namabarang', $katakunci)->paginate($perPage);
     }   
-
-    
+    public function submitdata_update_so($data)
+    {
+        $builder = $this->db->table('riwayat_SO');
+        $builder->insert($data);
+       
+    }
+    public function riwayat_so()
+    {
+        $builder = $this->db->table('riwayat_SO');
+        $query = $builder->get();
+        return $query->getResultArray();   
+    }
 }
 
 

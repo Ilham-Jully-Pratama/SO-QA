@@ -26,7 +26,7 @@
                                     <ul class="nav nav-third-level collapse">
                                         <?php if(in_groups(['supervisor', 'admin_kalkual',])) : ?>
                                         <li>
-                                            <a href="/dashboardqakalkual" class="fa fa-tag"> Dashboard</a>
+                                            <a href="/dashboardqakalkual" class="fa fa-tag">Informasi</a>
                                         </li>
                                         <?php endif; ?>
                                         <li>
@@ -39,6 +39,38 @@
                                         <?php endif; ?>
                                         <li>
                                             <a href="/laporanbarangkeluar" class="fa fa-tag"> Laporan Barang Keluar</a>
+                                        </li>
+                                        <li>
+                                            <a href="/update_sokalkual" class="fa fa-tag">Update SO</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- QA validasi -->
+                        <li>
+                            <a href="#" class="menu-toggle"><i class="fa fa-folder fa-fw"></i>QA Validasi<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                               
+                                <li>
+                                    <a href="#" class="submenu-toggle fa fa-folder-open">SO Reagen Validasi <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <?php if(in_groups(['supervisor', 'admin_qa'])) :?>
+                                        <li>
+                                            <a href="/dashboardadminqa" class="fa fa-tag">Informasi</a>
+                                        </li>
+                                         <?php endif; ?>
+                                        <li>
+                                            <a href="/databarangadminqa" class="fa fa-tag"> Data Barang</a>
+                                        </li>
+                                        <?php if(in_groups(['supervisor', 'admin_qa'])) :?>
+                                        <li>
+                                            <a href="/laporan_brg_masuk" class="fa fa-tag"> Laporan Barang Masuk</a>
+                                        </li>
+                                        <?php endif; ?>
+                                        <li>
+                                            <a href="/laporan_brg_keluar" class="fa fa-tag"> Laporan Barang Keluar</a>
                                         </li>
                                         
                                     </ul>

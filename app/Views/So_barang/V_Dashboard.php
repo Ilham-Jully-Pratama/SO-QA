@@ -41,29 +41,5 @@
     </div>
     <!-- /.container-fluid -->
 </div>
-<script>
-    // Ambil semua tombol hapus
-    const tombolHapus = document.querySelectorAll('#tombolhapusdata');
-    tombolHapus.forEach(tombol => {
-        tombol.addEventListener('click', function(event) {
-            event.preventDefault(); // Mencegah pengiriman form
-            Swal.fire({
-                title: "Konfirmasi",
-                text: "Yakin Akan Hapus Data ini",
-                icon: "info",
-                iconColor:"red",
-                allowOutsideClick: true,
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika pengguna mengklik OK, kirim form
-                    event.target.form.submit();
-                }
-            });
-        });
-    });
-</script>
-
 <!-- /#page-wrapper -->
-
 <?= $this-> endSection(); ?>

@@ -51,6 +51,8 @@ $routes->get('/barangedkalkual', 'Home::barangedkalkual',['filter'=>'role:superv
 $routes->get('/halamanerror', 'Home::halamanerror',);
 $routes->get('/Homepage', 'Home::homepage',);
 $routes->get('/printdatabarang', 'Home::cetakdatabarang',);
+$routes->get('/update_sokalkual', 'Home::update_so');
+$routes->get('/submit_update_so', 'Home::submit_update_so');
 
 
 // admin QA ------------------------------------------------------- admin QA-------------------------------------------------

@@ -144,8 +144,7 @@ class Home extends BaseController
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("Data Barang Kalkual.pdf", ["Attachment" => 0]);
-exit();
-
+        exit();
     }
     public function tambah_data_barang(): string
     {
@@ -739,9 +738,39 @@ exit();
         
         return view('Homepage',);
     }
+    public function update_so()
+    { 
+        $data['so'] = $this->databarangModel->riwayat_so();
+        return view('So_barang/V_UpdateSO',$data);
+    }
+    public function submit_update_so(){
+
+        // Correct way to set validation rules
+        if ($this->validate([
+            'tanggal_so' => 'required',
+            'keterangan'   => 'required',
+        ],[
+            'tanggal_so'=>[
+                'required' =>'jumlah barang harus diisi'
+            ],
+            'keterangan'=>[
+                'required' =>'keterangan harus diisi'
+            ],
+            
+
+        ])) {
+            $data = [
+                'tanggal_so' => $this->request->getVar('tanggal_so'),
+                'keterangan' => $this->request->getVar('keterangan'),
+            ];
+            $this->databarangModel->submitdata_update_so($data);
+            session()->setFlashdata('pesan', 'Data berhasil ditambah');
+            return redirect()->to('/update_sokalkual');
+        }
+        // dd($this->validation);
+        session()->setFlashdata('alert', 'Data Belum Tersimpan');
+        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
+    }
+
+
 }
-
-
-
-
-

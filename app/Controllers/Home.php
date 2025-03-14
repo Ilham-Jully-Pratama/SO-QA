@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\M_databarang; // Add this line to import the model
 use App\Controllers\BaseController;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 class Home extends BaseController
 {
 
@@ -142,7 +143,8 @@ class Home extends BaseController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
-        $dompdf->stream('Data Barang Kalkual.pdf', array("Attachment" => false));
+        $dompdf->stream("Data Barang Kalkual.pdf", ["Attachment" => 0]);
+exit();
 
     }
     public function tambah_data_barang(): string

@@ -34,7 +34,7 @@
                                 <?php foreach ($so as $dd) : ?>
                                     <tr class="odd gradeX">
                                         <td><?= $dd['tanggal_so']; ?></td>
-                                        <td><?= $dd['keterangan']; ?></td>
+                                        <td><?= nl2br(htmlspecialchars($dd['keterangan'])); ?></td>
                                     </tr>
                                 <?php endforeach; ?>   
                                 </tbody>
@@ -67,7 +67,7 @@
                     
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input class="form-control <?= session('validation')['keterangan'] ?? '' ? 'is-invalid' : ''; ?>" name="keterangan" value="">
+                        <textarea class="form-control <?= session('validation')['keterangan'] ?? '' ? 'is-invalid' : ''; ?>" name="keterangan" value=""> </textarea>
                         <p class="help-block">Masukan Nama barang</p>
                         <small>
                             <span class="text-danger"><?= session('validation')['keterangan'] ?? ''; ?></span>

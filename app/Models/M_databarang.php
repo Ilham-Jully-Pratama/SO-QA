@@ -27,7 +27,7 @@ class M_databarang extends Model
     protected $skipValidation     = false;
 
     // Add custom methods here as needed
-    public function ambildatabarang($perPage = 4)
+    public function ambildatabarang($perPage = 5)
     {
         $builder = $this->table($this->table);
         return $builder->orderBy('namabarang', 'ASC')->paginate($perPage);

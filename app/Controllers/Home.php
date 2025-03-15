@@ -125,7 +125,7 @@ class Home extends BaseController
         if ($katakunci) {
             $cari = $this->databarangModel->cari($katakunci); // Eksekusi query pencarian
         } else {
-            $cari = $this->databarangModel->ambildatabarang(4); // Ambil semua data dengan pagination
+            $cari = $this->databarangModel->ambildatabarang(5); // Ambil semua data dengan pagination
         }
         $terakhir_so=$this->databarangModel->tanggal_terakhir_so();
         $data = [

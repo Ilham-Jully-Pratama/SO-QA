@@ -140,7 +140,7 @@ class Home extends BaseController
     }
     public function cetakdatabarang()
     {
-        $data['barang'] = $this->databarangModel->ambildatabarang();
+        $data['barang'] = $this->databarangModel->cetakdatabarang();
         $dompdf = new Dompdf();
         $html= view('So_barang/V_Cetak_databarang', $data);
         $dompdf->loadHtml($html);

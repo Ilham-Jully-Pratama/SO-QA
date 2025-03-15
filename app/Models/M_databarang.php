@@ -255,6 +255,13 @@ class M_databarang extends Model
             $query = $builder->get();
             return $query->getRowArray(); // Ambil satu baris data sebagai array     
     }
+    public function cetakdatabarang()
+    {
+        $builder = $this->table($this->table);
+        $query= $builder->orderBy('namabarang', 'ASC');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
 }
 
 

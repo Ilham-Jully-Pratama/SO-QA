@@ -17,7 +17,13 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Terakhir melakukan stock opname 
+                        Terakhir melakukan stock opname
+                        <span class="text-danger">
+                            (<?= $terakhir_so ? date('d-m-Y', strtotime($terakhir_so['tanggal_so'])) : 'Belum ada data' ?>)
+                        </span>
+                        <a href="<?= base_url('/update_sokalkual')?>">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Lihat Detail
+                        </a>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -94,7 +100,9 @@
                                 <?php endforeach; ?>   
                                 </tbody>
                             </table>
-                            <?= $pager->links()?>
+                            <?php if ($pager) : ?>
+                                <?= $pager->links() ?>
+                            <?php endif; ?>
                         </div>
                         <a class="btn btn-danger" href="<?= base_url('/printdatabarang')?>" id="buttontambahbarang" style="margin: 6px;"
                         target="_blank" rel="noopener noreferrer">

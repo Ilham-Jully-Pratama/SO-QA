@@ -125,13 +125,16 @@ class Home extends BaseController
         if ($katakunci) {
             $cari = $this->databarangModel->cari($katakunci); // Eksekusi query pencarian
         } else {
-            $cari = $this->databarangModel->paginate(4); // Ambil semua data dengan pagination
+            $cari = $this->databarangModel->ambildatabarang(4); // Ambil semua data dengan pagination
         }
-        $data['katakunci'] = $katakunci;
-        $data['title'] = "Data Barang Kalkual";
-        $data['barang'] = $cari; // Simpan hasil pencarian atau semua data
-        $data['pager'] = $this->databarangModel->pager;
-        
+        $terakhir_so=$this->databarangModel->tanggal_terakhir_so();
+        $data = [
+            'katakunci'       => $katakunci,
+            'title'           => "Data Barang Kalkual",
+            'barang'          => $cari,
+            'pager'           => $this->databarangModel->pager,
+            'terakhir_so' => $terakhir_so, // Tambahkan tanggal terakhir stock opname
+        ];
         // Return view dengan data yang benar
         return view('So_barang/V_databarang', $data);
     }

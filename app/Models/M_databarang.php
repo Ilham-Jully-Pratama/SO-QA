@@ -27,11 +27,10 @@ class M_databarang extends Model
     protected $skipValidation     = false;
 
     // Add custom methods here as needed
-    public function ambildatabarang()
+    public function ambildatabarang($perPage = 4)
     {
-        $builder = $this->db->table($this->table);
-        $query = $builder->get();
-        return $query->getResultArray();
+        $builder = $this->table($this->table);
+        return $builder->orderBy('namabarang', 'ASC')->paginate($perPage);
     }
     public function submitbarangbaru($data)
     {
@@ -243,8 +242,18 @@ class M_databarang extends Model
     public function riwayat_so()
     {
         $builder = $this->db->table('riwayat_SO');
+        $query = $builder->orderBy('tanggal_so', 'DESC');
         $query = $builder->get();
         return $query->getResultArray();   
+    }
+    public function tanggal_terakhir_so()
+    {
+            $builder = $this->db->table('riwayat_SO');
+            $builder->select('tanggal_so');
+            $builder->orderBy('tanggal_so', 'DESC'); // Mengurutkan dari yang terbaru
+            $builder->limit(1); // Ambil hanya satu data terbaru
+            $query = $builder->get();
+            return $query->getRowArray(); // Ambil satu baris data sebagai array     
     }
 }
 

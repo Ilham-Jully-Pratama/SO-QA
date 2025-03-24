@@ -28,7 +28,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="d-flex">
-                                <a class="btn btn-success" href="<?= base_url('/tambah_data_barang')?>" id="buttontambahbarang" style="margin: 6px;">
+                                <a class="btn btn-success" href="<?= base_url('/tambah_data_barang_validasi')?>" id="buttontambahbarang" style="margin: 6px;">
                                     <i class="fa fa-plus"></i> Tambah Data
                                 </a>
                         </div>
@@ -54,7 +54,7 @@
                                         <th style="white-space: nowrap;text-align: center; vertical-align: middle;">Tanggal Update</th>
                                         <th style="white-space: nowrap; text-align: center; vertical-align: middle;">Tanggal Kedatangan</th>
                                         <th style="white-space: nowrap; text-align: center; vertical-align: middle;">Nama</th>
-                                        <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
+                                        <?php if(in_groups(['supervisor','admin_validasi'])) :?>
                                         <th>Update</th>
                                         <th>Delete</th>
                                         <th colspan="2" class="text-center">Aksi</th>
@@ -81,20 +81,20 @@
                                         <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['tanggal']; ?></td>
                                         <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['tanggal_datang']; ?></td>
                                         <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['nama']; ?></td>
-                                        <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
+                                        <?php if(in_groups(['supervisor','admin_validasi',])) :?>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="<?= base_url('/ubahbarang' . $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a>     
+                                            <a type="button" class="btn btn-info" href="<?= base_url('/ubahbarang_validasi/'. $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a>     
                                         </td>
                                         <td>
-                                            <form action="<?= site_url('/delete_barang'.$dd['id']) ?>" method="post">
+                                            <form action="<?= site_url('/delete_barang_validasi/'.$dd['id']) ?>" method="post">
                                                 
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" id="tombolhapusdata" class="btn btn-danger "style="margin:auto;height:20%"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
                                         </td>
-                                        <td><a type="button" class="btn btn-success" href="<?= base_url('/barang_masuk/' . $dd['kodebarang']) ?>" id="buttonmasuk" style="margin:auto;height:20%">Masuk</a></td>
+                                        <td><a type="button" class="btn btn-success" href="<?= base_url('/barang_masuk_validasi/' . $dd['kodebarang']) ?>" id="buttonmasuk" style="margin:auto;height:20%">Masuk</a></td>
                                         <?php endif ?>
-                                        <td><a type="button" class="btn btn-warning" href="<?= base_url('/barang_keluar/' . $dd['kodebarang']) ?>" id="buttonkeluar" style="margin:auto;height:20%">Keluar</a></td> 
+                                        <td><a type="button" class="btn btn-warning" href="<?= base_url('/barang_keluar_validasi/' . $dd['kodebarang']) ?>" id="buttonkeluar" style="margin:auto;height:20%">Keluar</a></td> 
                                        
                                     </tr>
                                 <?php endforeach; ?>   
@@ -104,7 +104,7 @@
                                 <?= $pager->links() ?>
                             <?php endif; ?>
                         </div>
-                        <a class="btn btn-danger" href="<?= base_url('/printdatabarang')?>" id="buttontambahbarang" style="margin: 6px;"
+                        <a class="btn btn-danger" href="<?= base_url('/printdatabarang_validasi')?>" id="buttontambahbarang" style="margin: 6px;"
                         target="_blank" rel="noopener noreferrer">
                             <i class="fa fa-print"></i> Print
                         </a>
@@ -141,6 +141,18 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#tabel-databarang').DataTable({
+                "searching": true,
+                "paging": true,
+                "lengthChange": true
+            });
+        }, 500);
+    });
+</script>
+
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"> Dashboard QA Kalkual </h1>
+                <h1 class="page-header"> Informasi QA Kalkual </h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>

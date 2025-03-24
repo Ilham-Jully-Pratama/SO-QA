@@ -199,16 +199,15 @@ class M_databarang extends Model
     }
        public function lihatjumlah($kodebarang)
     {
-        $builder = $this->db->table('databarang');
-        $builder->select('jumlah'); // Ambil hanya kolom jumlah
-        $builder->where('kodebarang', $kodebarang); // Filter berdasarkan kodebarang
-        $query = $builder->get();
+        return $this->table('databarang')
+                ->select('jumlah')
+                ->where('kodebarang', $kodebarang)
+                ->get()
+                ->getRowArray();
         
         // // Debugging
         // echo $this->db->getLastQuery(); // Menampilkan query terakhir
-        // dd($query); // Lihat hasil query
-        
-        return $query->getResultArray(); // Indicate success or failure
+        // dd($query); // Lihat hasil query // Indicate success or failure
     }
     public function hitungbaranghabiskalkual()
     {

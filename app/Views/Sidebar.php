@@ -40,9 +40,11 @@
                                         <li>
                                             <a href="/laporanbarangkeluar" class="fa fa-tag"> Laporan Barang Keluar</a>
                                         </li>
+                                        <?php if(in_groups(['supervisor', 'admin_kalkual'])) :?>
                                         <li>
                                             <a href="/update_sokalkual" class="fa fa-tag">Update SO</a>
                                         </li>
+                                        <?php endif; ?>
                                         
                                     </ul>
                                 </li>

@@ -83,10 +83,10 @@
                                         <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['nama']; ?></td>
                                         <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="<?= base_url('/ubahbarang' . $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a>     
+                                            <a type="button" class="btn btn-info" href="<?= base_url('/ubahbarang/' . $dd['kodebarang']) ?>" id="buttonupdate" style="margin:auto;height:20%"><i class="fa fa-pencil" aria-hidden="true"></i></a>     
                                         </td>
                                         <td>
-                                            <form action="<?= site_url('/delete_barang'.$dd['id']) ?>" method="post">
+                                            <form action="<?= site_url('/delete_barang/'.$dd['id']) ?>" method="post">
                                                 
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" id="tombolhapusdata" class="btn btn-danger "style="margin:auto;height:20%"><i class="fa fa-trash" aria-hidden="true"></i></button>

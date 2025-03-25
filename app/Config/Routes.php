@@ -7,12 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/databarang', 'Home::databarang');
-$routes->get('/ubahbarang/(:any)', 'Home::ubahbarang/$1',['filter'=>'role:admin_kalkual,']);
+$routes->get('ubahbarang/(:any)', 'Home::ubahbarang/$1',['filter'=>'role:admin_kalkual,']);
 $routes->get('/submit_ubah_barang(:any)', 'Home::submit_ubah_barang/$1',['filter'=>'role:admin_kalkual']);
 //tambah barang baru
 $routes->get('/tambah_data_barang', 'Home::tambah_data_barang',['filter'=>'role:admin_kalkual']);
 $routes->get('/submitbarangbaru', 'Home::submitbarangbaru',['filter'=>'role:admin_kalkual']);
-$routes->delete('/delete_barang(:num)','Home::delete/$1',['filter'=>'role:admin_kalkual']);
+$routes->delete('delete_barang/(:num)','Home::delete/$1',['filter'=>'role:admin_kalkual']);
 $routes->get('/daftarnamabarang', 'Home::daftarnamabarang',['filter'=>'role:admin_kalkual']);
 $routes->post('/submitnamabarang', 'Home::submitnamabarang',['filter'=>'role:admin_kalkual']);
 $routes->get('/hapusnamabarang', 'Home::hapusnamabarang',['filter'=>'role:admin_kalkual']);

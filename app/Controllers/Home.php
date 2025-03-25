@@ -529,7 +529,7 @@ class Home extends BaseController
                         if(count($data['cekexpired']) > 0 && count($data['itemcount']) > 0){
                             $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan Habis & ED cek Dashboard');
                             //buat isi email 
-                            $alamat_email=(['ilhamjullypratama3007@gmail.com','felicia.aniska@bintang7.com']);
+                            $alamat_email=(['ilhamjullypratama3007@gmail.com']);
                             $email->setTo($alamat_email);
                             $alamat_pengirim="ilhamjullypratama3007@gmail.com";
                             $email->setFrom($alamat_pengirim);

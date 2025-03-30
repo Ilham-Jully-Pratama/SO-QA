@@ -141,6 +141,17 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#tabel-databarang').DataTable({
+                "searching": true,
+                "paging": true,
+                "lengthChange": true
+            });
+        }, 500);
+    });
+</script>
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

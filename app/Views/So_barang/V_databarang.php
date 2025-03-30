@@ -89,13 +89,12 @@
                                             <form action="<?= site_url('/delete_barang/'.$dd['id']) ?>" method="post">
                                                 
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" id="tombolhapusdata" class="btn btn-danger "style="margin:auto;height:20%"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                <button type="submit" class="btn btn-danger tombolhapusdata "style="margin:auto;height:20%"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
                                         </td>
                                         <td><a type="button" class="btn btn-success" href="<?= base_url('/barang_masuk/' . $dd['kodebarang']) ?>" id="buttonmasuk" style="margin:auto;height:20%">Masuk</a></td>
                                         <?php endif ?>
                                         <td><a type="button" class="btn btn-warning" href="<?= base_url('/barang_keluar/' . $dd['kodebarang']) ?>" id="buttonkeluar" style="margin:auto;height:20%">Keluar</a></td> 
-                                       
                                     </tr>
                                 <?php endforeach; ?>   
                                 </tbody>
@@ -141,17 +140,7 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        setTimeout(function() {
-            $('#tabel-databarang').DataTable({
-                "searching": true,
-                "paging": true,
-                "lengthChange": true
-            });
-        }, 500);
-    });
-</script>
+
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

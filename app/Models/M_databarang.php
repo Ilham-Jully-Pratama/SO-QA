@@ -180,7 +180,6 @@ class M_databarang extends Model
    // lainya 
     public function itemcount()
     {
-        // $builder = $this->db->table('databarang');
         return $this->db->table('databarang b')
                         ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
                         ->join('daftarbarang d', 'b.namabarang = d.namabarang')

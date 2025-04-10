@@ -27,11 +27,10 @@ class Data_Admin extends Model
     protected $skipValidation     = false;
 
     // Add custom methods here as needed
-    public function ambildatabarang()
+    public function ambildatabarang($perPage)
     {
-        $builder = $this->db->table($this->table);
-        $query = $builder->get();
-        return $query->getResultArray();
+        $builder = $this->table($this->table);
+        return $builder->orderBy('namabarang', 'ASC')->paginate($perPage);
     }
     public function caridaftarbarang()
     {
@@ -167,23 +166,13 @@ class Data_Admin extends Model
     
     public function itemcount()
     {
-        $builder = $this->db->table('databarang_admin');
-        return $builder->groupStart() // Memulai grup kondisi
-                        ->where('jumlah <=', 10)->where('satuan', 'pcs') // Kondisi 1: jumlah <= 0
-                        ->orWhere('jumlah <=', 20)->where('satuan', 'ampul') // Kondisi 2: jumlah <= 20
-                        ->orWhere('jumlah <=', 200)->where('satuan', 'ml') // Kondisi 3: jumlah <= 200
-                        ->orWhere('jumlah <=', 10)->where('satuan', 'vial') // Kondisi 4: jumlah <= 10
-                        ->groupEnd() // Mengakhiri grup kondisi
-                        ->get()->getResultArray(); // Menghitung jumlah row yang memenuhi kondisi
+        return $this->db->table('databarang_admin b')
+                        ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                        ->join('daftarbarang_adminqa d', 'b.namabarang = d.namabarang')
+                        ->where('b.jumlah < d.minimum')
+                        ->get()
+                        ->getResultArray();
     }
-    // public function cekexpired()
-    // {
-    //     $builder = $this->db->table('databarang_admin');
-    //     // Ambil data barang yang expired atau akan expired dalam 4 bulan
-    //     return $builder->where('expired <=', date('Y-m-d'))
-    //                     ->orWhere('expired <=', date('Y-m-d', strtotime('+4 months')))
-    //                     ->get()->getResultArray(); // Mengembalikan data barang yang expired
-    // }
     public function lihatjumlah($kodebarang)
     {
         $builder = $this->db->table('databarang_admin');
@@ -194,25 +183,51 @@ class Data_Admin extends Model
         $result = $query->getRowArray();
         return $result['jumlah'];
     }
+    public function hitungbaranghabiskalkual()
+    {
+        return $this->db->table('databarang_admin b')
+                        ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                        ->join('daftarbarang_adminqa d', 'b.namabarang = d.namabarang')
+                        ->where('b.jumlah < d.minimum')
+                        ->countAllResults();
+    }
 
-    // public function hitungbaranghabiskalkual()
-    // {
-    //     $builder = $this->db->table('databarang');
-    //     return $builder->groupStart() // Memulai grup kondisi
-    //                     ->where('jumlah <=', 10)->where('satuan', 'pcs') // Kondisi 1: jumlah <= 0
-    //                     ->orWhere('jumlah <=', 20)->where('satuan', 'ampul') // Kondisi 2: jumlah <= 20
-    //                     ->orWhere('jumlah <=', 200)->where('satuan', 'ml') // Kondisi 3: jumlah <= 200
-    //                     ->orWhere('jumlah <=', 10)->where('satuan', 'vial') // Kondisi 4: jumlah <= 10
-    //                     ->groupEnd() // Mengakhiri grup kondisi
-    //                     ->countAllResults(); // Menghitung jumlah row yang memenuhi kondisi
-    // }
-    // public function hitungbarangedkalkual()
-    // {
-    //     $builder = $this->db->table('databarang');
-    //     // Ambil data barang yang expired atau akan expired dalam 4 bulan
-    //     return $builder->where('expired <=', date('Y-m-d'))
-    //                     ->orWhere('expired <=', date('Y-m-d', strtotime('+4 months')))
-    //                     ->countAllResults(); // Mengembalikan data barang yang expired
-    // }
+    public function cetakdatabarang()
+    {
+        $builder = $this->table($this->table);
+        $query= $builder->orderBy('namabarang', 'ASC');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function riwayat_so()
+    {
+        $builder = $this->db->table('riwayat_so_adminqa');
+        $query = $builder->orderBy('tanggal_so', 'DESC');
+        $query = $builder->get();
+        return $query->getResultArray();   
+    }
+    public function submitdata_update_so($data)
+    {
+        $builder = $this->db->table('riwayat_so_adminqa');
+        $builder->insert($data);
+       
+    }
+
+    public function tanggal_terakhir_so()
+    {
+            $builder = $this->db->table('riwayat_so_adminqa');
+            $builder->select('tanggal_so');
+            $builder->orderBy('tanggal_so', 'DESC'); // Mengurutkan dari yang terbaru
+            $builder->limit(1); // Ambil hanya satu data terbaru
+            $query = $builder->get();
+            return $query->getRowArray(); // Ambil satu baris data sebagai array     
+    }
+
+    public function cari($katakunci, $perPage = 4)
+    {
+        return $this->like('namabarang', $katakunci)->paginate($perPage);
+    }   
+  
 }
 

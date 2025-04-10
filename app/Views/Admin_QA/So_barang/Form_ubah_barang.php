@@ -59,7 +59,7 @@
                                                         </div>
                                                     <button type="submit" id="tombolsubmit"class="btn btn-success">Submit Button</button>
                                                     <button type="reset" class="btn btn-danger">Reset Button</button>
-                                                    <button type="button" class="btn btn-warning" onclick="window.location.href='<?= site_url('/databarang'); ?>';">Kembali</button>
+                                                    <button type="button" class="btn btn-warning" onclick="window.location.href='<?= site_url('/databarangadminqa'); ?>';">Kembali</button>
                                                 </form>
                                                 <?php endforeach; ?> 
                                             </div>

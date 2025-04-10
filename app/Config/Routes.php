@@ -86,6 +86,11 @@ $routes->get('/cari_brg_keluar', 'Admin_QA::laporanbarangkeluar',['filter'=>'rol
 //lainya 
 $routes->get('/dashboardadminqa', 'Admin_QA::dashboardqakalkual',['filter'=>'role:supervisor,admin_qa']);
 $routes->get('/baranghabisadminqa', 'Admin_QA::baranghabiskalkual',['filter'=>'role:supervisor,admin_qa']);
+$routes->get('/printdatabarang_admin', 'Admin_QA::cetakdatabarang',);
+$routes->get('/update_so_adminqa', 'Admin_QA::update_so');
+$routes->get('/submit_update_so_adminqa', 'Admin_QA::submit_update_so');
+
+
 // QA Validasi.............................................................QA VALIDASI .................................................//
 $routes->get('/databarang_validasi', 'Validasi_QA::databarang',);
 $routes->get('/printdatabarang_validasi', 'Validasi_QA::cetakdatabarang',);

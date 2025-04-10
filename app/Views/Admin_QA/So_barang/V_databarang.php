@@ -17,18 +17,35 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Data Monitoring Stock
+                            Terakhir melakukan stock opname
+                            <span class="text-danger">
+                                (<?= $terakhir_so ? date('d-m-Y', strtotime($terakhir_so['tanggal_so'])) : 'Belum ada data' ?>)
+                            </span>
+                            <a href="<?= base_url('/update_so_adminqa')?>">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> Lihat Detail
+                            </a>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <a type="button" class="btn btn-success" href="<?= base_url('/tambah_data_barangadminqa')?>" id="buttontambahbarang" style="margin:auto;height:20%;margin-bottom:10px;"><i class="fa fa-plus" aria-hidden="true"></i>Tambah Data </a>
-
+                        <div class="d-flex">
+                                <a class="btn btn-success" href="<?= base_url('/tambah_data_barangadminqa')?>" id="buttontambahbarang" style="margin: 6px;">
+                                    <i class="fa fa-plus"></i> Tambah Data
+                                </a>
+                        </div>
+                        <div>
+                            <form action="<?= site_url('/databarangadminqa') ?>" method="get"> 
+                                <input type="text" class="form-control" name="katakunci" placeholder="Kata Kunci Nama Barang" style="width: 200px; margin: 6px;">
+                                <button class="btn btn-warning" type="submit"  style="margin: 6px;">Cari</button>
+                            </form>
+                            
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead class="text-center">
                                     <tr>
                                         <th>Kodebarang</th>
                                         <th style="white-space: nowrap;">Nama Barang</th>
+                                        <th style="white-space: nowrap;">Merek</th>
                                         <th>Satuan</th>
                                         <th>Jumlah</th>
                                         <th style="white-space: nowrap;">Tanggal Update</th>
@@ -49,6 +66,7 @@
                                     <tr class="odd gradeX">
                                         <td style="white-space: nowrap;"><?= $dd['kodebarang']; ?></td>
                                         <td style="white-space: nowrap;"><?= $dd['namabarang']; ?></td>
+                                        <td style="white-space: nowrap;"><?= $dd['merek']; ?></td>
                                         <td><?= $dd['satuan']; ?></td>
                                         <td><?= $dd['jumlah']; ?></td>
                                         <td style="white-space: nowrap;"><?= $dd['tanggal']; ?></td>
@@ -73,8 +91,14 @@
                                 <?php endforeach; ?>   
                                 </tbody>
                             </table>
-                            <?= $pager->links()?>
+                            <?php if ($pager) : ?>
+                                <?= $pager->links() ?>
+                            <?php endif; ?>
                         </div>
+                        <a class="btn btn-danger" href="<?= base_url('/printdatabarang_admin')?>" id="buttontambahbarang" style="margin: 6px;"
+                        target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-print"></i> Print
+                        </a>
                     </div>
                     <!-- /.panel-body -->
                 </div>

@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Daftar Nama Barang </h1>
+                <h1 class="page-header">Daftar Nama Barang ATK QA </h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -26,6 +26,7 @@
                                     <tr>
                                        
                                         <th class="text-center">Nama Barang</th>
+                                        <th class="text-center">Batas Minimum</th>
                                         <th class="text-center">Delete</th>
                                       
                                     </tr>
@@ -33,7 +34,8 @@
                                 <tbody>
                                 <?php foreach ($barang as $dd) : ?>
                                     <tr class="odd gradeX">
-                                        <td class="text-center"><?= $dd['namabarang']; ?></td>    
+                                        <td class="text-center"><?= $dd['namabarang']; ?></td>
+                                        <td class="text-center"><?= $dd['minimum']; ?></td>     
                                         <td class="text-center">
                                         <form action="<?= site_url('/deletedaftarnamabarang_adminqa'.$dd['id']) ?>" method="post">
                                                 <input type="hidden" name="_method" value="DELETE">

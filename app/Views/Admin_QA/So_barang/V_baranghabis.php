@@ -29,6 +29,7 @@
                                         <th class="text-center">Nama Barang</th>
                                         <th class="text-center">Satuan</th>
                                         <th class="text-center">Jumlah</th>
+                                        <th class="text-center">Batas Minimum</th>
                                                                        
                                     </tr>
                                 </thead>
@@ -39,7 +40,8 @@
                                             <td><?= $dd['kodebarang']; ?></td>
                                             <td><?= $dd['namabarang']; ?></td>
                                             <td><?= $dd['satuan']; ?></td>
-                                            <td><?= $dd['jumlah']; ?></td>                                                                                       
+                                            <td><?= $dd['jumlah']; ?></td>
+                                            <td><?= $dd['minimum']; ?></td>                                                                                       
                                         </tr>
                                     <?php endforeach; ?>  
                                 <?php else: ?>

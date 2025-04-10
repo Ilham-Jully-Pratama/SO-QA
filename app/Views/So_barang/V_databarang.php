@@ -34,7 +34,7 @@
                         </div>
                         <div>
                             <form action="<?= site_url('/databarang') ?>" method="get"> 
-                                <input type="text" class="form-control" name="katakunci" placeholder="Cari" style="width: 200px; margin: 6px;">
+                                <input type="text" class="form-control" name="katakunci" placeholder="Kata Kunci Nama Barang" style="width: 200px; margin: 6px;">
                                 <button class="btn btn-warning" type="submit"  style="margin: 6px;">Cari</button>
                             </form>
                             

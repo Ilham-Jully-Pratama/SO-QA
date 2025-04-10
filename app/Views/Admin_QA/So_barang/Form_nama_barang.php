@@ -24,6 +24,11 @@
                                                     <input class="form-control <?= session('validation') && isset(session('validation')['namabarang']) ? (session('validation')['namabarang'] ? 'is-invalid' : '') : ''; ?>"name="namabarang" type="text" placeholder="Input Nama Barang Yang akan Di daftarkan">
                                                     <small>
                                                         <span class="text-danger"><?= session('validation') && isset(session('validation')['namabarang']) ? session('validation')['namabarang'] : ''; ?></span>
+                                                    </small> <br>
+                                                    <label>Jumlah Minimum</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['minimum']) ? (session('validation')['minimum'] ? 'is-invalid' : '') : ''; ?>"name="minimum" type="text" placeholder="Input Jumlah minimum Order">
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['minimum']) ? session('validation')['minimum'] : ''; ?></span>
                                                     </small>  
                                                 </div>
                                                 <button type="submit" id="tombolsubmit"class="btn btn-success">Submit Button</button>

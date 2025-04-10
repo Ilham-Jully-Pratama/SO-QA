@@ -4,10 +4,13 @@ namespace App\Controllers;
 
 use App\Models\Data_Admin; // Add this line to import the model
 use App\Controllers\BaseController;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 class Admin_QA extends BaseController
 {
 
-    protected $databarangModel; // Add this property
+    protected $databarangModel;
+    protected $dompdf;  // Add this property
     protected $session; // Deklarasi properti session
     protected $validation;
     public function __construct()
@@ -19,35 +22,26 @@ class Admin_QA extends BaseController
 
     public function index(): string
     {
-        // $email= \config\Services::email();
-        $data['itemcount'] = $this->databarangModel->itemcount();
-        // dd($data);
-        $data['cekexpired'] = $this->databarangModel->cekexpired();
-
-        if (count($data['cekexpired']) > 0 || count($data['itemcount']) > 0) {
-            if(count($data['cekexpired']) > 0 && count($data['itemcount']) > 0){
-                $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan Habis & ED cek Dashboard');  
-                return view('Homepage');   
-            }elseif(count($data['itemcount']) > 0){
-                $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan Habis cek Dashboard');
-                return view('Homepage');
-            }
-            $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan ED cek Dashboard');
-            return view('Homepage'); 
-        }
-        $this->session->setFlashdata('pesanhompage', ' Tidak Ada barang yang akan ED dan Habis');
         return view('Homepage');
     }
     public function databarang(): string
     {
         
-        // You can now use the model in your methods
-        $data['barang'] = $this->databarangModel->ambildatabarang();
-        $data['title'] = "Data Barang Admin QA ";
-        $data['barang'] = $this->databarangModel->paginate(4);
-        $data['pager'] = $this->databarangModel->pager;
-        // Return a view or process the data as needed
-        return view('Admin_QA/So_barang/V_databarang', $data,);
+        $katakunci = $this->request->getGet('katakunci');
+        if ($katakunci) {
+            $cari = $this->databarangModel->cari($katakunci); // Eksekusi query pencarian
+        } else {
+            $cari = $this->databarangModel->ambildatabarang(5); // Ambil semua data dengan pagination
+        }
+        $terakhir_so=$this->databarangModel->tanggal_terakhir_so();
+        $data = [
+            'katakunci'       => $katakunci,
+            'title'           => "Data Barang Admin",
+            'barang'          => $cari,
+            'pager'           => $this->databarangModel->pager,
+            'terakhir_so' => $terakhir_so, // Tambahkan tanggal terakhir stock opname
+        ];
+        return view('Admin_QA/So_barang/V_databarang', $data);
     }
     public function tambah_data_barangadminqa(): string
     {
@@ -111,15 +105,20 @@ class Admin_QA extends BaseController
     { 
         if ($this->validate([
             'namabarang' => 'required',
+            'minimum' => 'required',
         ],[
             'namabarang'=>[
                 'required'=> 'Nama Harus Disi'
-            ]
+            ],
+            'minimum'=>[
+                'required'=> 'Jumlah Minimum Harus Disi'
+            ],
                      
         ])) { 
             $data = [
                 
                 'namabarang' => $this->request->getVar('namabarang'),
+                'minimum' => $this->request->getVar('minimum'),
                               
             ];
             $this->databarangModel->submitnamabarang($data);
@@ -377,35 +376,6 @@ class Admin_QA extends BaseController
                 } else {
                     $this->databarangModel->submitbarangkeluar($data);
                     session()->setFlashdata('pesan', 'Data Berhasil Dikeluarkan ');
-                    $email= \config\Services::email();
-                    $data['itemcount'] = $this->databarangModel->itemcount();
-                    if (count($data['itemcount']) > 0) 
-                        {
-                            $this->session->setFlashdata('notif', 'Ada barang yang akan habis ');
-                            //buat isi email 
-                            $alamat_email=(['ilhamjullypratama3007@gmail.com']);
-                            $email->setTo($alamat_email);
-                            $alamat_pengirim="ilhamjullypratama3007@gmail.com";
-                            $email->setFrom($alamat_pengirim);
-                            $subject="SO Barang Kalkual";
-                            $email->setSubject($subject);
-                            // Tabel untuk itemcount
-                            $isi_pesan = "Berikut List Barang Kalkual yang akan Habis <br><br>";
-                            $isi_pesan .= '<table border="1" style="border-collapse: collapse;">'; // Membuat tabel dengan border
-                            $isi_pesan .= '<tr><th style="padding: 10px;">Kode Barang</th><th style="padding: 10px;">Nama Barang</th><th style="padding: 10px;">Jumlah</th><th style="padding: 10px;">Satuan</th></tr>'; // Header tabel
-                            foreach ($data['itemcount'] as $item) { // Iterasi melalui itemcount
-                                $isi_pesan .= '<tr>'; // Baris baru untuk setiap item
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['kodebarang'] . '</td>'; // Kode Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['namabarang'] . '</td>'; // Nama Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['jumlah'] . '</td>'; // Jumlah
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['satuan'] . '</td>'; // Satuan
-                                $isi_pesan .= '</tr>'; // Menutup baris
-                            }
-                            $isi_pesan .= '</table><br>'; // Menutup tabel dan menambahkan jarak
-                            $email->setMessage($isi_pesan); 
-                            $email->send();
-                            return redirect()->to('/databarangadminqa ');
-                        }
                     }
                     return redirect()->to('/databarangadminqa ');
                 }
@@ -445,22 +415,14 @@ class Admin_QA extends BaseController
         session()->setFlashdata('alert', 'Tanggal Awal dan Akhir Harus Sesuai');
         return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());// Pass results to the view     
     }
-    
-    // public function cekbarangqa()
-    // { 
-    //     $data['itemcount'] = $this->databarangModel->itemcount();
-    //     $data['cekexpired'] = $this->databarangModel->cekexpired();
-    //     // dd($data);
-    //     return view('So_barang/V_cekQA',$data ); // Pass results to the view
-    // }  
-
+     
     public function dashboardqakalkual()
     { 
         $jumlahdata = $this->databarangModel->hitungbaranghabiskalkual();
         
         return view('Admin_QA/So_barang/V_Dashboard', [
             'jumlahdata' => $jumlahdata,
-            // 'jumlahdataed' => $jumlahdataed
+           
         ]);
     }
     public function baranghabiskalkual()
@@ -470,18 +432,52 @@ class Admin_QA extends BaseController
         return view('Admin_QA/So_barang/V_baranghabis',$data);
     }
     
-    // public function barangedkalkual()
-    // { 
-    //     $data['cekexpired'] = $this->databarangModel->cekexpired();
-        
-    //     return view('So_barang/V_baranged',$data);
-    // }
-    // public function halamanerror()
-    // { 
-        
-        
-    //     return view('Halaman_Error',);
-    // }
+    public function cetakdatabarang()
+    {
+        $data['barang'] = $this->databarangModel->cetakdatabarang();
+        $dompdf = new Dompdf();
+        $html= view('Admin_QA/So_barang/V_Cetak_databarang', $data);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream("Data Barang Kalkual.pdf", ["Attachment" => 0]);
+        exit();
+    }
+
+    public function update_so()
+    { 
+        $data['so'] = $this->databarangModel->riwayat_so();
+        return view('Admin_QA/So_barang/V_UpdateSO',$data);
+    }
+
+    public function submit_update_so(){
+
+        // Correct way to set validation rules
+        if ($this->validate([
+            'tanggal_so' => 'required',
+            'keterangan'   => 'required',
+        ],[
+            'tanggal_so'=>[
+                'required' =>'jumlah barang harus diisi'
+            ],
+            'keterangan'=>[
+                'required' =>'keterangan harus diisi'
+            ],
+            
+
+        ])) {
+            $data = [
+                'tanggal_so' => $this->request->getVar('tanggal_so'),
+                'keterangan' => $this->request->getVar('keterangan'),
+            ];
+            $this->databarangModel->submitdata_update_so($data);
+            session()->setFlashdata('pesan', 'Data berhasil ditambah');
+            return redirect()->to('/update_so_adminqa');
+        }
+        // dd($this->validation);
+        session()->setFlashdata('alert', 'Data Belum Tersimpan');
+        return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
+    }
 }
 
 

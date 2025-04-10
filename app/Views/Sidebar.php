@@ -74,6 +74,11 @@
                                         <li>
                                             <a href="/laporanbarangkeluar_validasi" class="fa fa-tag"> Laporan Barang Keluar</a>
                                         </li>
+                                        <?php if(in_groups(['supervisor', 'admin_validasi'])) :?>
+                                        <li>
+                                            <a href="/update_so_validasi" class="fa fa-tag">Update SO</a>
+                                        </li>
+                                        <?php endif; ?>
                                         
                                     </ul>
                                 </li>
@@ -103,6 +108,11 @@
                                         <li>
                                             <a href="/laporan_brg_keluar" class="fa fa-tag"> Laporan Barang Keluar</a>
                                         </li>
+                                        <?php if(in_groups(['supervisor', 'admin_qa'])) :?>
+                                        <li>
+                                            <a href="/update_so_adminqa" class="fa fa-tag">Update SO</a>
+                                        </li>
+                                        <?php endif; ?>
                                         
                                     </ul>
                                 </li>

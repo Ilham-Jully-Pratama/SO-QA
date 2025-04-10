@@ -89,7 +89,7 @@
                                     <ul class="nav nav-third-level collapse">
                                         <?php if(in_groups(['supervisor', 'admin_qa'])) :?>
                                         <li>
-                                            <a href="/dashboardadminqa" class="fa fa-tag"> Dashboard</a>
+                                            <a href="/dashboardadminqa" class="fa fa-tag">Informasi</a>
                                         </li>
                                          <?php endif; ?>
                                         <li>

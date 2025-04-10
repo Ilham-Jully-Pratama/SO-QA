@@ -180,14 +180,13 @@ class M_databarang extends Model
    // lainya 
     public function itemcount()
     {
-        $builder = $this->db->table('databarang');
-        return $builder->groupStart() // Memulai grup kondisi
-                        ->where('jumlah <=', 10)->where('satuan', 'pcs') // Kondisi 1: jumlah <= 0
-                        ->orWhere('jumlah <=', 20)->where('satuan', 'ampul') // Kondisi 2: jumlah <= 20
-                        ->orWhere('jumlah <=', 200)->where('satuan', 'ml') // Kondisi 3: jumlah <= 200
-                        ->orWhere('jumlah <=', 10)->where('satuan', 'vial') // Kondisi 4: jumlah <= 10
-                        ->groupEnd() // Mengakhiri grup kondisi
-                        ->get()->getResultArray(); // Menghitung jumlah row yang memenuhi kondisi
+        // $builder = $this->db->table('databarang');
+        return $this->db->table('databarang b')
+                        ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                        ->join('daftarbarang d', 'b.namabarang = d.namabarang')
+                        ->where('b.jumlah < d.minimum')
+                        ->get()
+                        ->getResultArray();
     }
     public function cekexpired()
     {
@@ -209,18 +208,15 @@ class M_databarang extends Model
         // echo $this->db->getLastQuery(); // Menampilkan query terakhir
         // dd($query); // Lihat hasil query // Indicate success or failure
     }
-    public function hitungbaranghabiskalkual()
-    {
-        $builder = $this->db->table('databarang');
-        return $builder->groupStart() // Memulai grup kondisi
-                        ->where('jumlah <=', 10)->where('satuan', 'pcs') // Kondisi 1: jumlah <= 0
-                        ->orWhere('jumlah <=', 20)->where('satuan', 'ampul') // Kondisi 2: jumlah <= 20
-                        ->orWhere('jumlah <=', 200)->where('satuan', 'ml') // Kondisi 3: jumlah <= 200
-                        ->orWhere('jumlah <=', 10)->where('satuan', 'vial') // Kondisi 4: jumlah <= 10
-                        ->groupEnd() // Mengakhiri grup kondisi
-                        ->countAllResults(); // Menghitung jumlah row yang memenuhi kondisi
+    public function hitungbaranghabiskalkual() // untuk angka jumlah yang habisnya
+    { 
+         return $this->db->table('databarang b')
+                        ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                        ->join('daftarbarang d', 'b.namabarang = d.namabarang')
+                        ->where('b.jumlah < d.minimum')
+                        ->countAllResults();
     }
-    public function hitungbarangedkalkual()
+    public function hitungbarangedkalkual() // untuk jumlah angka yg ed nya
     {
         $builder = $this->db->table('databarang');
         // Ambil data barang yang expired atau akan expired dalam 4 bulan

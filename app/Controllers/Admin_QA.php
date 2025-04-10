@@ -452,29 +452,23 @@ class Admin_QA extends BaseController
     //     $data['cekexpired'] = $this->databarangModel->cekexpired();
     //     // dd($data);
     //     return view('So_barang/V_cekQA',$data ); // Pass results to the view
-    // }
-    
-    
+    // }  
 
-    
-    
-
-    // public function dashboardqakalkual()
-    // { 
-    //     $jumlahdata = $this->databarangModel->hitungbaranghabiskalkual();
-    //     $jumlahdataed = $this->databarangModel->hitungbarangedkalkual();
+    public function dashboardqakalkual()
+    { 
+        $jumlahdata = $this->databarangModel->hitungbaranghabiskalkual();
         
-    //     return view('So_barang/V_Dashboard', [
-    //         'jumlahdata' => $jumlahdata,
-    //         'jumlahdataed' => $jumlahdataed
-    //     ]);
-    // }
-    // public function baranghabiskalkual()
-    // { 
-    //     $data['itemcount'] = $this->databarangModel->itemcount();
+        return view('Admin_QA/So_barang/V_Dashboard', [
+            'jumlahdata' => $jumlahdata,
+            // 'jumlahdataed' => $jumlahdataed
+        ]);
+    }
+    public function baranghabiskalkual()
+    { 
+        $data['itemcount'] = $this->databarangModel->itemcount();
         
-    //     return view('So_barang/V_baranghabis',$data);
-    // }
+        return view('Admin_QA/So_barang/V_baranghabis',$data);
+    }
     
     // public function barangedkalkual()
     // { 

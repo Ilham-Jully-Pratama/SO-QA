@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Form Barang Masuk </h1>
+                            <h1 class="page-header">Form Barang Masuk Admin QA </h1>
                         </div> 
                         <!-- /.col-lg-12 -->
                     </div>
@@ -14,7 +14,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Input Barang Masuk
+                                    Input Barang Masuk Admin QA
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">

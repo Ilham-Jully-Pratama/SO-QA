@@ -307,15 +307,19 @@ class Home extends BaseController
     { 
         if ($this->validate([
             'namabarang' => 'required',
+            'minimum' => 'required',
         ],[
             'namabarang'=>[
                 'required'=> 'Nama Harus Disi'
-            ]
-                     
+            ],
+            'minimum'=>[
+                'required'=> 'Jumlah Minimum Harus Diisi'
+            ],      
         ])) { // Perbaiki di sini
             $data = [
                 
                 'namabarang' => $this->request->getVar('namabarang'),
+                'minimum' => $this->request->getVar('minimum'),
                               
             ];
             $this->databarangModel->submitnamabarang($data);

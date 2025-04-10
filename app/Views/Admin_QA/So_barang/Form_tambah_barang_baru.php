@@ -8,7 +8,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu
     <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Form Tambah Data Barang </h1>
+                            <h1 class="page-header">Form Tambah Data Barang Admin QA </h1>
                         </div> 
                         <!-- /.col-lg-12 -->
                     </div>
@@ -19,7 +19,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Input Data Barang 
+                                    Input Data Barang Admin QA 
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">

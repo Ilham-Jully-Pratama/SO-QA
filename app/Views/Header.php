@@ -17,18 +17,18 @@
 
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown navbar-inverse">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <!-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-                        </a>
+                        </a> -->
                         <ul class="dropdown-menu dropdown-alerts">
                              
-                            <li>
+                            <!-- <li>
                                 <div class="text-center">
                                 <a href="<?= base_url('/cekbarangqa')?>" type="button" class="btn btn-success" style="width: 80%;"><i class="fa fa-exclamation-triangle fa-fw"></i>Cek Barang QA</a>
                                 </div>
                                  
-                            </li>
-                            <li class="divider"></li>
+                            </li> -->
+                            <!-- <li class="divider"></li> -->
                             
                             <!-- <li>
                                 <a class="text-center" href="#">

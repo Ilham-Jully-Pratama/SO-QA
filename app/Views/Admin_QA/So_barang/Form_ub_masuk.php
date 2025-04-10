@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Form Ubah Barang Masuk </h1>
+                            <h1 class="page-header">Form Ubah Barang Masuk Admin QA </h1>
                         </div> 
                         <!-- /.col-lg-12 -->
                     </div>
@@ -13,7 +13,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Ubah Data Barang 
+                                    Ubah Data Barang Admin QA
                                 </div>
                                 <div class="panel-body">
                                 <div id="flash2" data-flash="<?= esc(session()->getFlashdata('pesan')); ?>">

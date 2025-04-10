@@ -141,7 +141,7 @@
         });
     });
 </script>
-<script>
+<!-- <script>
     $(document).ready(function() {
         setTimeout(function() {
             $('#tabel-databarang').DataTable({
@@ -151,7 +151,7 @@
             });
         }, 500);
     });
-</script>
+</script> -->
 
 <!-- /#page-wrapper -->
 

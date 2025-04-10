@@ -35,7 +35,7 @@
                                 <?php foreach ($barang as $dd) : ?>
                                     <tr class="odd gradeX">
                                         <td class="text-center"><?= $dd['namabarang']; ?></td>
-                                        <td class="text-center"><?= $dd['minimum']; ?></td>      
+                                        <td class="text-center"><?= $dd['minimum']; ?></td>       
                                         <td class="text-center">
                                         <form action="<?= site_url('/deletedaftarnamabarang'.$dd['id']) ?>" method="post">
                                                 

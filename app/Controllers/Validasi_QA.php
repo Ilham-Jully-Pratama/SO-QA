@@ -634,7 +634,7 @@ class Validasi_QA extends BaseController
     { 
         $data['cekexpired'] = $this->databarangModel->cekexpired();
         
-        return view('QA_validasi/V_baranged',$data);
+        return view('QA_Validasi/V_baranged',$data);
     }
     public function halamanerror()
     { 

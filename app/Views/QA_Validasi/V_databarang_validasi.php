@@ -21,7 +21,7 @@
                         <span class="text-danger">
                             (<?= $terakhir_so ? date('d-m-Y', strtotime($terakhir_so['tanggal_so'])) : 'Belum ada data' ?>)
                         </span>
-                        <a href="<?= base_url('/update_sokalkual')?>">
+                        <a href="<?= base_url('/update_so_validasi')?>">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i> Lihat Detail
                         </a>
                     </div>
@@ -33,7 +33,7 @@
                                 </a>
                         </div>
                         <div>
-                            <form action="<?= site_url('/databarang') ?>" method="get"> 
+                            <form action="<?= site_url('/databarang_validasi') ?>" method="get"> 
                                 <input type="text" class="form-control" name="katakunci" placeholder="Cari" style="width: 200px; margin: 6px;">
                                 <button class="btn btn-warning" type="submit"  style="margin: 6px;">Cari</button>
                             </form>

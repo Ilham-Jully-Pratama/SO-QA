@@ -22,7 +22,7 @@
                             <a href="#" class="menu-toggle"><i class="fa fa-folder fa-fw"></i> QA Kalkual<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
-                                    <a href="#" class="submenu-toggle fa fa-folder-open"> SO Barang <span class="fa arrow"></span></a>
+                                    <a href="#" class="submenu-toggle fa fa-folder-open"> SO Kalkual <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
                                         <?php if(in_groups(['supervisor', 'admin_kalkual',])) : ?>
                                         <li>
@@ -56,13 +56,13 @@
                             <ul class="nav nav-second-level collapse">
                                
                                 <li>
-                                    <a href="#" class="submenu-toggle fa fa-folder-open">SO Reagen Validasi <span class="fa arrow"></span></a>
+                                    <a href="#" class="submenu-toggle fa fa-folder-open">SO Validasi <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
-                                        <?php if(in_groups(['supervisor', 'admin_validasi'])) :?>
+                                        
                                         <li>
-                                            <a href="/dashboardadminqa" class="fa fa-tag">Informasi</a>
+                                            <a href="/dashboard_validasi" class="fa fa-tag">Informasi</a>
                                         </li>
-                                         <?php endif; ?>
+                                        
                                         <li>
                                             <a href="/databarang_validasi" class="fa fa-tag"> Data Barang</a>
                                         </li>
@@ -92,11 +92,11 @@
                                 <li>
                                     <a href="#" class="submenu-toggle fa fa-folder-open"> SO Alat Tulis QA <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
-                                        <?php if(in_groups(['supervisor', 'admin_qa'])) :?>
+                                       
                                         <li>
                                             <a href="/dashboardadminqa" class="fa fa-tag">Informasi</a>
                                         </li>
-                                         <?php endif; ?>
+                                      
                                         <li>
                                             <a href="/databarangadminqa" class="fa fa-tag"> Data Barang</a>
                                         </li>

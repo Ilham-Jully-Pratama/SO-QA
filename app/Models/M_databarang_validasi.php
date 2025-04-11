@@ -180,14 +180,12 @@ class M_databarang_validasi extends Model
    // lainya 
     public function itemcount()
     {
-        $builder = $this->db->table('databarang_validasi');
-        return $builder->groupStart() // Memulai grup kondisi
-                        ->where('jumlah <=', 10)->where('satuan', 'pcs') // Kondisi 1: jumlah <= 0
-                        ->orWhere('jumlah <=', 20)->where('satuan', 'ampul') // Kondisi 2: jumlah <= 20
-                        ->orWhere('jumlah <=', 200)->where('satuan', 'ml') // Kondisi 3: jumlah <= 200
-                        ->orWhere('jumlah <=', 10)->where('satuan', 'vial') // Kondisi 4: jumlah <= 10
-                        ->groupEnd() // Mengakhiri grup kondisi
-                        ->get()->getResultArray(); // Menghitung jumlah row yang memenuhi kondisi
+        return $this->db->table('databarang_validasi b')
+                        ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                        ->join('daftarbarang_validasi d', 'b.namabarang = d.namabarang')
+                        ->where('b.jumlah < d.minimum')
+                        ->get()
+                        ->getResultArray();
     }
     public function cekexpired()
     {
@@ -211,14 +209,11 @@ class M_databarang_validasi extends Model
     }
     public function hitungbaranghabiskalkual()
     {
-        $builder = $this->db->table('databarang_validasi');
-        return $builder->groupStart() // Memulai grup kondisi
-                        ->where('jumlah <=', 10)->where('satuan', 'pcs') // Kondisi 1: jumlah <= 0
-                        ->orWhere('jumlah <=', 20)->where('satuan', 'ampul') // Kondisi 2: jumlah <= 20
-                        ->orWhere('jumlah <=', 200)->where('satuan', 'ml') // Kondisi 3: jumlah <= 200
-                        ->orWhere('jumlah <=', 10)->where('satuan', 'vial') // Kondisi 4: jumlah <= 10
-                        ->groupEnd() // Mengakhiri grup kondisi
-                        ->countAllResults(); // Menghitung jumlah row yang memenuhi kondisi
+        return $this->db->table('databarang_validasi b')
+                        ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                        ->join('daftarbarang_validasi d', 'b.namabarang = d.namabarang')
+                        ->where('b.jumlah < d.minimum')
+                        ->countAllResults();
     }
     public function hitungbarangedkalkual()
     {

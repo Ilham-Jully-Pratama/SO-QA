@@ -5,46 +5,50 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Daftar Nama Barang Validasi </h1>
+                <h1 class="page-header">Barang Validasi QA yang Habis</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        
+       
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        List Nama Barang Validasi
+                        Data Monitoring Stock Validasi QA
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div id="flash2" data-flash="<?= esc(session()->getFlashdata('alert')); ?>"></div>
+
                         <div class="table-responsive">
+                            <h3 class="text-center">Barang Akan Habis</h3>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                       
+                                        <th class="text-center">Kodebarang</th>
                                         <th class="text-center">Nama Barang</th>
+                                        <th class="text-center">Satuan</th>
+                                        <th class="text-center">Jumlah</th>
                                         <th class="text-center">Batas Minimum</th>
-                                        <th class="text-center">Delete</th>
-                                      
+                                                                       
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($barang as $dd) : ?>
-                                    <tr class="odd gradeX">
-                                        <td class="text-center"><?= $dd['namabarang']; ?></td>   
-                                        <td class="text-center"><?= $dd['minimum']; ?></td>   
-                                        <td class="text-center">
-                                        <form action="<?= site_url('/deletedaftarnamabarang_validasi'.$dd['id']) ?>" method="post">
-                                                
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" id="tombolhapusdata" class="btn btn-danger "style="margin:auto;height:20%"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                            </form>
-                                        </td>
+                                <?php if (!empty($itemcount)): ?>    
+                                    <?php foreach ($itemcount as $dd) : ?>
+                                        <tr class="odd gradeX">
+                                            <td><?= $dd['kodebarang']; ?></td>
+                                            <td><?= $dd['namabarang']; ?></td>
+                                            <td><?= $dd['satuan']; ?></td>
+                                            <td><?= $dd['jumlah']; ?></td>
+                                            <td><?= $dd['minimum']; ?></td>                                                                                       
+                                        </tr>
+                                    <?php endforeach; ?>  
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="5" class="text-center">Tidak ada data yang akan habis</td>
                                     </tr>
-                                <?php endforeach; ?> 
+                                <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -82,15 +86,8 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            "searching": true,
-            "paging": true,
-            "lengthChange": true
-        });
-    });
-</script>
+
+
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

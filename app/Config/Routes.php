@@ -27,8 +27,8 @@ $routes->post('submit_ubah_barang_masuk/(:any)', 'Home::submit_ubah_barang_masuk
 $routes->post('/caridatamasuk', 'Home::caridatamasuk',['filter'=>'role:supervisor,admin_kalkual']);
 $routes->get('/caridatamasuk', 'Home::laporanbarangmasuk',['filter'=>'role:supervisor,admin_kalkual']);
 // barang keluar
-$routes->get('/barang_keluar/(:any)','Home::barang_keluar/$1',['filter'=>'role:supervisor,admin_kalkual,user,admin_qa']);
-$routes->get('/submit_barang_keluar(:any)', 'Home::submit_barang_keluar/$1',['filter'=>'role:supervisor,admin_kalkual,user,admin_qa']);
+$routes->get('/barang_keluar/(:any)','Home::barang_keluar/$1');
+$routes->get('/submit_barang_keluar(:any)', 'Home::submit_barang_keluar/$1');
 $routes->get('/laporanbarangkeluar', 'Home::laporanbarangkeluar');
 $routes->delete('/deletebarangkeluar(:num)','Home::deletebarangkeluar/$1',['filter'=>'role:admin_kalkual']);
 $routes->post('/caridatakeluar','Home::caridatakeluar');
@@ -43,15 +43,14 @@ $routes->post('/simpan_update_user(:num)','Kelola_user::simpan_update_user/$1');
 $routes->post('/simpan_tambah_user','Kelola_user::simpan_tambah_user',['filter'=>'role:supervisor']);
 // lainya 
 
-$routes->get('/cekbarangqa', 'Home::cekbarangqa',['filter'=>'role:supervisor,admin_kalkual']);
-$routes->get('/dashboardqakalkual', 'Home::dashboardqakalkual',['filter'=>'role:supervisor,admin_kalkual']);
-$routes->get('/baranghabiskalkual', 'Home::baranghabiskalkual',['filter'=>'role:supervisor,admin_kalkual']);
-$routes->get('/barangedkalkual', 'Home::barangedkalkual',['filter'=>'role:supervisor,admin_kalkual']);
+$routes->get('/dashboardqakalkual', 'Home::dashboardqakalkual');
+$routes->get('/baranghabiskalkual', 'Home::baranghabiskalkual');
+$routes->get('/barangedkalkual', 'Home::barangedkalkual');
 $routes->get('/halamanerror', 'Home::halamanerror',);
 $routes->get('/Homepage', 'Home::homepage',);
 $routes->get('/printdatabarang', 'Home::cetakdatabarang',);
-$routes->get('/update_sokalkual', 'Home::update_so');
-$routes->get('/submit_update_so', 'Home::submit_update_so');
+$routes->get('/update_sokalkual', 'Home::update_so',[ 'filter'=>'role:admin_kalkual']);
+$routes->get('/submit_update_so', 'Home::submit_update_so',[ 'filter'=>'role:admin_kalkual']);
 
 
 // admin QA ------------------------------------------------------- admin QA-------------------------------------------------
@@ -76,19 +75,19 @@ $routes->post('/submit_ubah_brg_masuk(:any)', 'Admin_QA::submit_ubah_brg_masuk/$
 $routes->post('/cari_brg_masuk', 'Admin_QA::caridatamasuk',['filter'=>'role:supervisor,admin_qa']);
 $routes->get('/cari_brg_masuk', 'Admin_QA::laporanbarangmasuk',['filter'=>'role:supervisor,admin_qa']);
 //barang keluar
-$routes->get('/brg_keluar(:any)', 'Admin_QA::brg_keluar/$1',['filter'=>'role:admin_qa,supervisor,user']);
+$routes->get('/brg_keluar(:any)', 'Admin_QA::brg_keluar/$1');
 $routes->get('/laporan_brg_keluar', 'Admin_QA::laporanbarangkeluar');
-$routes->post('/submit_brg_keluar(:any)', 'Admin_QA::submit_barang_keluar/$1',['filter'=>'role:admin_qa,user']);
+$routes->post('/submit_brg_keluar(:any)', 'Admin_QA::submit_barang_keluar/$1');
 $routes->delete('/delete_brg_keluar(:any)', 'Admin_QA::deletebarangkeluar/$1',['filter'=>'role:admin_qa']);
-$routes->post('/cari_brg_keluar', 'Admin_QA::caridatakeluar',['filter'=>'role:supervisor,admin_qa,user']);
-$routes->get('/cari_brg_keluar', 'Admin_QA::laporanbarangkeluar',['filter'=>'role:supervisor,admin_qa,user']);
+$routes->post('/cari_brg_keluar', 'Admin_QA::caridatakeluar');
+$routes->get('/cari_brg_keluar', 'Admin_QA::laporanbarangkeluar');
 
 //lainya 
-$routes->get('/dashboardadminqa', 'Admin_QA::dashboardqakalkual',['filter'=>'role:supervisor,admin_qa']);
-$routes->get('/baranghabisadminqa', 'Admin_QA::baranghabiskalkual',['filter'=>'role:supervisor,admin_qa']);
+$routes->get('/dashboardadminqa', 'Admin_QA::dashboardqakalkual');
+$routes->get('/baranghabisadminqa', 'Admin_QA::baranghabiskalkual');
 $routes->get('/printdatabarang_admin', 'Admin_QA::cetakdatabarang',);
-$routes->get('/update_so_adminqa', 'Admin_QA::update_so');
-$routes->get('/submit_update_so_adminqa', 'Admin_QA::submit_update_so');
+$routes->get('/update_so_adminqa', 'Admin_QA::update_so',[ 'filter'=>'role:admin_qa']);
+$routes->get('/submit_update_so_adminqa', 'Admin_QA::submit_update_so',[ 'filter'=>'role:admin_qa']);
 
 
 // QA Validasi.............................................................QA VALIDASI .................................................//
@@ -121,9 +120,15 @@ $routes->delete('deletebarangmasuk_validasi/(:any)', 'Validasi_QA::deletebarangm
 $routes->get('ubahbarangmasuk_validasi/(:any)', 'Validasi_QA::ubahbarangmasuk/$1',['filter'=>'role:admin_validasi']);
 $routes->post('submit_ubah_barang_masuk_validasi/(:any)', 'Validasi_QA::submit_ubah_barang_masuk/$1',['filter'=>'role:admin_validasi']);
 //pengelolaan laporan barang keluar
-$routes->get('/laporanbarangkeluar_validasi', 'Validasi_QA::laporanbarangkeluar_validasi',['filter'=>'role:supervisor,admin_kalkual,user,admin_qa,admin_validasi']);
-$routes->post('/caridata_keluar_validasi', 'Validasi_QA::caridatakeluar',['filter'=>'role:supervisor,admin_validasi']);
-$routes->get('/caridata_keluar_validasi', 'Validasi_QA::laporanbarangkeluar_validasi',['filter'=>'role:supervisor,admin_validasi']);
+$routes->get('/laporanbarangkeluar_validasi', 'Validasi_QA::laporanbarangkeluar_validasi');
+$routes->post('/caridata_keluar_validasi', 'Validasi_QA::caridatakeluar');
+$routes->get('/caridata_keluar_validasi', 'Validasi_QA::laporanbarangkeluar_validasi');
 $routes->delete('deletebarangkeluar_validasi/(:any)', 'Validasi_QA::deletebarangkeluar/$1',['filter'=>'role:admin_validasi']);
 $routes->get('ubah_barang_keluar_validasi/(:any)', 'Validasi_QA::ubahbarangkeluar/$1',['filter'=>'role:admin_validasi']);
 $routes->post('submit_ubah_barang_keluar_validasi/(:any)', 'Validasi_QA::submit_ubah_barang_keluar/$1',['filter'=>'role:admin_validasi']);
+ // lainya 
+ $routes->get('/dashboard_validasi', 'Validasi_QA::dashboardqakalkual');
+ $routes->get('/baranghabis_validasi', 'Validasi_QA::baranghabiskalkual');
+ $routes->get('/baranged_validasi', 'Validasi_QA::barangedkalkual');
+ $routes->get('/update_so_validasi', 'Validasi_QA::update_so',[ 'filter'=>'role:admin_validasi']);
+$routes->get('/submit_update_so_validasi', 'Validasi_QA::submit_update_so',[ 'filter'=>'role:admin_validasi']);

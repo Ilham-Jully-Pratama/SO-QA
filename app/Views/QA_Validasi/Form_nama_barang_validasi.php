@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Form Tambah List Nama Barang </h1>
+                            <h1 class="page-header">Form Tambah List Nama Barang Vakidasi </h1>
                         </div> 
                         <!-- /.col-lg-12 -->
                     </div>
@@ -13,7 +13,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Input Barang Masuk
+                                    Input Nama Barang
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -24,7 +24,12 @@
                                                     <input class="form-control <?= session('validation') && isset(session('validation')['namabarang']) ? (session('validation')['namabarang'] ? 'is-invalid' : '') : ''; ?>"name="namabarang" type="text" placeholder="Input Nama Barang Yang akan Di daftarkan">
                                                     <small>
                                                         <span class="text-danger"><?= session('validation') && isset(session('validation')['namabarang']) ? session('validation')['namabarang'] : ''; ?></span>
-                                                    </small>  
+                                                    </small> <br>
+                                                    <label>Jumlah Minimum</label>
+                                                    <input class="form-control <?= session('validation') && isset(session('validation')['minimum']) ? (session('validation')['minimum'] ? 'is-invalid' : '') : ''; ?>"name="minimum" type="text" placeholder="Input Jumlah minimum Order">
+                                                    <small>
+                                                        <span class="text-danger"><?= session('validation') && isset(session('validation')['minimum']) ? session('validation')['minimum'] : ''; ?></span>
+                                                    </small>   
                                                 </div>
                                                 <button type="submit" id="tombolsubmit"class="btn btn-success">Submit Button</button>
                                                 <button type="reset" class="btn btn-danger">Reset Button</button>

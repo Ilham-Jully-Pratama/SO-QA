@@ -24,11 +24,11 @@
                                 <li>
                                     <a href="#" class="submenu-toggle fa fa-folder-open"> SO Kalkual <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
-                                        <?php if(in_groups(['supervisor', 'admin_kalkual',])) : ?>
+                                        
                                         <li>
                                             <a href="/dashboardqakalkual" class="fa fa-tag">Informasi</a>
                                         </li>
-                                        <?php endif; ?>
+                                        
                                         <li>
                                             <a href="/databarang" class="fa fa-tag"> Data Barang</a>
                                         </li>

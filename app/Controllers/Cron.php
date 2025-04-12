@@ -29,7 +29,7 @@ class Cron extends Controller
 
         // Ambil data barang yang akan kedaluwarsa sebelum tanggal 4 bulan berikutnya
         $builderED = $db->table('databarang')
-            ->select('databarang.kodebarang, databarang.namabarang, databarang.expired_date, daftarbarang.minimum')
+            ->select('databarang.kodebarang, databarang.namabarang, databarang.expired, daftarbarang.minimum')
             ->join('daftarbarang', 'databarang.namabarang = daftarbarang.namabarang')
             ->where('databarang.expired <', $tanggal4BulanDepan);
 

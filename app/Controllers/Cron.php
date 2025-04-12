@@ -144,7 +144,7 @@ class Cron extends Controller
               <tr>
                 <td>' . htmlspecialchars($barang->kodebarang) . '</td>
                 <td>' . htmlspecialchars($barang->namabarang) . '</td>
-                <td>' . htmlspecialchars($barang->expired_date) . '</td>
+                <td>' . htmlspecialchars($barang->expired) . '</td>
                 <td>' . htmlspecialchars($barang->minimum) . '</td>
               </tr>';
         }

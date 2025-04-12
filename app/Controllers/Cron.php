@@ -18,18 +18,18 @@ class Cron extends Controller
 
         // Ambil data barang yang jumlahnya kurang dari batas minimum
         $builder = $db->table('databarang')
-            ->select('databarang.kodebarang, databarang.namabarang, databarang.jumlah, daftarbarang.minimum')
+            ->select('databarang.kodebarang, databarang.namabarang, databarang.jumlah,databarang.satuan, daftarbarang.minimum')
             ->join('daftarbarang', 'databarang.namabarang = daftarbarang.namabarang')
             ->where('databarang.jumlah < daftarbarang.minimum');
         
         $barangKurang = $builder->get()->getResult();
 
         // Hitung tanggal 4 bulan berikutnya
-        $tanggal4BulanDepan = date('Y-m-d', strtotime('first day of next month +3 days'));
+        $tanggal4BulanDepan = date('Y-m-d', strtotime('+4 months'));
 
         // Ambil data barang yang akan kedaluwarsa sebelum tanggal 4 bulan berikutnya
         $builderED = $db->table('databarang')
-            ->select('databarang.kodebarang, databarang.namabarang, databarang.expired, daftarbarang.minimum')
+            ->select('databarang.kodebarang, databarang.satuan, databarang.jumlah, databarang.namabarang, databarang.expired, daftarbarang.minimum')
             ->join('daftarbarang', 'databarang.namabarang = daftarbarang.namabarang')
             ->where('databarang.expired <', $tanggal4BulanDepan); 
  
@@ -108,6 +108,7 @@ class Cron extends Controller
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
+                     <th>Satuan</th>
                     <th>Batas Minimum</th>
                   </tr>
                 </thead>
@@ -119,6 +120,7 @@ class Cron extends Controller
                 <td>' . htmlspecialchars($barang->kodebarang) . '</td>
                 <td>' . htmlspecialchars($barang->namabarang) . '</td>
                 <td>' . htmlspecialchars($barang->jumlah) . '</td>
+                <td>' . htmlspecialchars($barang->satuan) . '</td>
                 <td>' . htmlspecialchars($barang->minimum) . '</td>
               </tr>';
         }
@@ -134,7 +136,8 @@ class Cron extends Controller
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
                 <th>Tanggal Kedaluwarsa</th>
-                <th>Batas Minimum</th>
+                <th>Jumlah</th>
+                 <th>Satuan</th>
               </tr>
             </thead>
             <tbody>';
@@ -145,7 +148,8 @@ class Cron extends Controller
                 <td>' . htmlspecialchars($barang->kodebarang) . '</td>
                 <td>' . htmlspecialchars($barang->namabarang) . '</td>
                 <td>' . htmlspecialchars($barang->expired) . '</td>
-                <td>' . htmlspecialchars($barang->minimum) . '</td>
+                <td>' . htmlspecialchars($barang->jumlah) . '</td>
+                 <td>' . htmlspecialchars($barang->satuan) . '</td>
               </tr>';
         }
 

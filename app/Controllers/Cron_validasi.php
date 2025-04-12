@@ -18,7 +18,7 @@ class Cron_validasi extends Controller
 
         // Ambil data barang yang jumlahnya kurang dari batas minimum
         $builder = $db->table('databarang_validasi')
-            ->select('databarang_validasi.kodebarang, databarang_vaidasi.namabarang, databarang_validasi.jumlah,databarang_validasi.satuan, daftarbarang_validasi.minimum')
+            ->select('databarang_validasi.kodebarang, databarang_validasi.namabarang, databarang_validasi.jumlah,databarang_validasi.satuan, daftarbarang_validasi.minimum')
             ->join('daftarbarang_validasi', 'databarang_validasi.namabarang = daftarbarang_validasi.namabarang')
             ->where('databarang_validasi.jumlah < daftarbarang_validasi.minimum');
         
@@ -29,7 +29,7 @@ class Cron_validasi extends Controller
 
         // Ambil data barang yang akan kedaluwarsa sebelum tanggal 4 bulan berikutnya
         $builderED = $db->table('databarang_validasi')
-            ->select('databarang_validasi.kodebarang, databarang_vaidasi.satuan, databarang_validasi.jumlah, databarang_validasi.namabarang, databarang_validasi.expired, daftarbarang_validasi.minimum')
+            ->select('databarang_validasi.kodebarang, databarang_validasi.satuan, databarang_validasi.jumlah, databarang_validasi.namabarang, databarang_validasi.expired, daftarbarang_validasi.minimum')
             ->join('daftarbarang_validasi', 'databarang_validasi.namabarang = daftarbarang_validasi.namabarang')
             ->where('databarang_validasi.expired <', $tanggal4BulanDepan); 
  

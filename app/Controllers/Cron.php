@@ -98,7 +98,7 @@ class Cron extends Controller
         <body>
           <div class="email-container">
             <div class="email-header">
-              <h1>Peringatan Stok Barang Menipis & Barang yang Akan ED</h1>
+              <h1>Peringatan Stok Barang Menipis & Barang yang Akan ED QA Kalkual</h1>
             </div>
             <div class="email-body">
               <h3>Berikut daftar barang yang stoknya kurang dari batas minimum:</h3>
@@ -129,7 +129,7 @@ class Cron extends Controller
             </tbody>
           </table>
 
-          <h3>Berikut daftar barang yang akan kedaluwarsa sebelum tanggal ' . date('d F Y', strtotime($tanggal4BulanDepan)) . ':</h3>
+          <h3>Berikut daftar barang yang akan kedaluwarsa Dalam Rentang 4 bulan lagi :</h3>
           <table>
             <thead>
               <tr>
@@ -165,7 +165,7 @@ class Cron extends Controller
   </html>';
 
         // Kirim email
-        $this->kirimEmail('ilhamjullypratama3007@gmail.com', 'Peringatan Stok Barang Menipis dan Barang yang Akan ED', $pesan);
+        $this->kirimEmail('ilhamjullypratama3007@gmail.com', 'Peringatan Stok Barang Menipis dan Barang yang Akan ED QA Kalkual', $pesan);
 
         return 'Reminder dikirim!';
     }

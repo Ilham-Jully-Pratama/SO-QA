@@ -134,3 +134,4 @@ $routes->post('submit_ubah_barang_keluar_validasi/(:any)', 'Validasi_QA::submit_
  $routes->get('/submit_update_so_validasi', 'Validasi_QA::submit_update_so',[ 'filter'=>'role:admin_validasi']);
 // file remainder
  $routes->get('cron/reminder/(:segment)', 'Cron::reminder/$1');
+ $routes->get('cron_validasi/reminder/(:segment)', 'Cron_validasi::reminder/$1');

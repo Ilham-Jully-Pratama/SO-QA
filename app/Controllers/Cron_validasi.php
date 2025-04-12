@@ -19,7 +19,7 @@ class Cron_validasi extends Controller
         // Ambil data barang yang jumlahnya kurang dari batas minimum
         $builder = $db->table('databarang_validasi')
             ->select('databarang_validasi.kodebarang, databarang_vaidasi.namabarang, databarang_validasi.jumlah,databarang_validasi.satuan, daftarbarang_validasi.minimum')
-            ->join('daftarbarang_validasis', 'databarang_validasis.namabarang = daftarbarang_validasi.namabarang')
+            ->join('daftarbarang_validasi', 'databarang_validasi.namabarang = daftarbarang_validasi.namabarang')
             ->where('databarang_validasi.jumlah < daftarbarang_validasi.minimum');
         
         $barangKurang = $builder->get()->getResult();

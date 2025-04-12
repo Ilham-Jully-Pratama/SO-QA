@@ -31,8 +31,8 @@ class Cron extends Controller
         $builderED = $db->table('databarang')
             ->select('databarang.kodebarang, databarang.namabarang, databarang.expired, daftarbarang.minimum')
             ->join('daftarbarang', 'databarang.namabarang = daftarbarang.namabarang')
-            ->where('databarang.expired <', $tanggal4BulanDepan);
-
+            ->where('databarang.expired <', $tanggal4BulanDepan); 
+ 
         $barangED = $builderED->get()->getResult();
 
         if (empty($barangKurang) && empty($barangED)) {

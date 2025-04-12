@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class Cron extends Controller
+class Cron_validasi extends Controller
 {
     public function reminder($token = null)
     {

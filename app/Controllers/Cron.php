@@ -18,14 +18,25 @@ class Cron extends Controller
 
         // Ambil data barang yang jumlahnya kurang dari batas minimum
         $builder = $db->table('databarang')
-            ->select('databarang.*, daftarbarang.minimum')
+            ->select('databarang.kodebarang, databarang.namabarang, databarang.jumlah, daftarbarang.minimum')
             ->join('daftarbarang', 'databarang.namabarang = daftarbarang.namabarang')
             ->where('databarang.jumlah < daftarbarang.minimum');
         
         $barangKurang = $builder->get()->getResult();
 
-        if (empty($barangKurang)) {
-            return 'Semua stok aman.';
+        // Hitung tanggal 4 bulan berikutnya
+        $tanggal4BulanDepan = date('Y-m-d', strtotime('first day of next month +3 days'));
+
+        // Ambil data barang yang akan kedaluwarsa sebelum tanggal 4 bulan berikutnya
+        $builderED = $db->table('databarang')
+            ->select('databarang.kodebarang, databarang.namabarang, databarang.expired_date, daftarbarang.minimum')
+            ->join('daftarbarang', 'databarang.namabarang = daftarbarang.namabarang')
+            ->where('databarang.expired <', $tanggal4BulanDepan);
+
+        $barangED = $builderED->get()->getResult();
+
+        if (empty($barangKurang) && empty($barangED)) {
+            return 'Semua stok aman dan tidak ada barang yang akan kedaluwarsa.';
         }
 
         // Buat isi email dalam format HTML tabel
@@ -87,13 +98,14 @@ class Cron extends Controller
         <body>
           <div class="email-container">
             <div class="email-header">
-              <h1>Peringatan Stok Barang Menipis</h1>
+              <h1>Peringatan Stok Barang Menipis & Barang yang Akan ED</h1>
             </div>
             <div class="email-body">
               <h3>Berikut daftar barang yang stoknya kurang dari batas minimum:</h3>
               <table>
                 <thead>
                   <tr>
+                    <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
                     <th>Batas Minimum</th>
@@ -104,8 +116,35 @@ class Cron extends Controller
         foreach ($barangKurang as $barang) {
             $pesan .= '
               <tr>
+                <td>' . htmlspecialchars($barang->kodebarang) . '</td>
                 <td>' . htmlspecialchars($barang->namabarang) . '</td>
                 <td>' . htmlspecialchars($barang->jumlah) . '</td>
+                <td>' . htmlspecialchars($barang->minimum) . '</td>
+              </tr>';
+        }
+
+        $pesan .= '
+            </tbody>
+          </table>
+
+          <h3>Berikut daftar barang yang akan kedaluwarsa sebelum tanggal ' . date('d F Y', strtotime($tanggal4BulanDepan)) . ':</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Tanggal Kedaluwarsa</th>
+                <th>Batas Minimum</th>
+              </tr>
+            </thead>
+            <tbody>';
+
+        foreach ($barangED as $barang) {
+            $pesan .= '
+              <tr>
+                <td>' . htmlspecialchars($barang->kodebarang) . '</td>
+                <td>' . htmlspecialchars($barang->namabarang) . '</td>
+                <td>' . htmlspecialchars($barang->expired_date) . '</td>
                 <td>' . htmlspecialchars($barang->minimum) . '</td>
               </tr>';
         }
@@ -122,7 +161,7 @@ class Cron extends Controller
   </html>';
 
         // Kirim email
-        $this->kirimEmail('ilhamjullypratama3007@gmail.com', 'Peringatan Stok Barang Menipis', $pesan);
+        $this->kirimEmail('ilhamjullypratama3007@gmail.com', 'Peringatan Stok Barang Menipis dan Barang yang Akan ED', $pesan);
 
         return 'Reminder dikirim!';
     }

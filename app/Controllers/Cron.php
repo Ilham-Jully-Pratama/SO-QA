@@ -61,7 +61,7 @@ class Cron extends Controller
             .email-header {
               background-color: #007bff;
               color: white;
-              padding: 20px;
+              padding: 10px;
               text-align: center;
               border-top-left-radius: 8px;
               border-top-right-radius: 8px;

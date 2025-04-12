@@ -73,7 +73,7 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             'honeypot',
-            'login'  => ['except' => ['cron/reminder']],
+            'login',
             // 'csrf',
             // 'invalidchars',
         ],
@@ -108,6 +108,13 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
+
+        'login' => [
+            'except' => [
+                'cron/reminder',
+                'cron/reminder/*',
+            ],
+        ],
       
     ];
 }

@@ -84,8 +84,6 @@
         });
     });
 </script>
-
-
 <!-- /#page-wrapper -->
 
 <?= $this-> endSection(); ?>

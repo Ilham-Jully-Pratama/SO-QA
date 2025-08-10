@@ -410,7 +410,8 @@ class Validasi_QA extends BaseController
             ],
             
 
-        ])) {
+        ])) 
+        {
             $data = [
                 'kodebarang' => $this->request->getVar('kodebarang'),
                 'namabarang' => $this->request->getVar('namabarang'),
@@ -436,73 +437,8 @@ class Validasi_QA extends BaseController
                     $this->databarangModel->submitbarangkeluar($data);
                     session()->setFlashdata('pesan', 'Data Berhasil Dikeluarkan ');
                     $email= \config\Services::email();
-                    $data['itemcount'] = $this->databarangModel->itemcount();
-                    $data['cekexpired'] = $this->databarangModel->cekexpired();
-                    if (count($data['cekexpired']) > 0 || count($data['itemcount']) > 0) {
-                        if(count($data['cekexpired']) > 0 && count($data['itemcount']) > 0){
-                            $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan Habis & ED cek Dashboard');
-                            //buat isi email 
-                            $alamat_email=(['ilhamjullypratama3007@gmail.com']);
-                            $email->setTo($alamat_email);
-                            $alamat_pengirim="ilhamjullypratama3007@gmail.com";
-                            $email->setFrom($alamat_pengirim);
-                            $subject="SO Barang Kalkual";
-                            $email->setSubject($subject);
-                            // Tabel untuk itemcount
-                            $isi_pesan = "Berikut List Barang Kalkual yang akan Habis <br><br>";
-                            $isi_pesan .= '<table border="1" style="border-collapse: collapse;">'; // Membuat tabel dengan border
-                            $isi_pesan .= '<tr><th style="padding: 10px;">Kode Barang</th><th style="padding: 10px;">Nama Barang</th><th style="padding: 10px;">Jumlah</th><th style="padding: 10px;">Satuan</th></tr>'; // Header tabel
-                            foreach ($data['itemcount'] as $item) { // Iterasi melalui itemcount
-                                $isi_pesan .= '<tr>'; // Baris baru untuk setiap item
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['kodebarang'] . '</td>'; // Kode Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['namabarang'] . '</td>'; // Nama Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['jumlah'] . '</td>'; // Jumlah
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['satuan'] . '</td>'; // Satuan
-                                $isi_pesan .= '</tr>'; // Menutup baris
-                            }
-                            $isi_pesan .= '</table><br>'; // Menutup tabel dan menambahkan jarak
-            
-                            // Tabel untuk cekexpired
-                            $isi_pesan .= "Berikut List Barang Kalkual yang akan ED <br><br>";
-                            $isi_pesan .= '<table border="1" style="border-collapse: collapse;">'; // Membuat tabel dengan border
-                            $isi_pesan .= '<tr><th style="padding: 10px;">Kode Barang</th><th style="padding: 10px;">Nama Barang</th><th style="padding: 10px;">Jumlah</th><th style="padding: 10px;">Expired</th></tr>'; // Header tabel
-                            foreach ($data['cekexpired'] as $item) { // Iterasi melalui cekexpired
-                                $isi_pesan .= '<tr>'; // Baris baru untuk setiap item
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['kodebarang'] . '</td>'; // Kode Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['namabarang'] . '</td>'; // Nama Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['jumlah'] . '</td>'; // Jumlah
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['expired'] . '</td>'; // Expired
-                                $isi_pesan .= '</tr>'; // Menutup baris
-                            }
-                            $isi_pesan .= '</table>'; // Menutup tabel
-                            $email->setMessage($isi_pesan); 
-                            $email->send();
-                            return redirect()->to('/databarang_validasi ');
-                        }elseif(count($data['itemcount']) > 0){
-                            $this->session->setFlashdata('notif', 'Ada barang QA Validasi yang akan Habis cek Informasi');
-            
-                            $alamat_email="ilhamjullypratama3007@gmail.com";
-                            $email->setTo($alamat_email);
-                            $alamat_pengirim="ilhamjullypratama3007@gmail.com";
-                            $email->setFrom($alamat_pengirim);
-                            $subject="SO Barang Kalkual";
-                            $email->setSubject($subject);
-                            $isi_pesan = "Berikut List Barang Kalkual yang akan Habis <br><br>"; // Menambahkan jarak ke bawah
-                            $isi_pesan .= '<table border="1" style="border-collapse: collapse;">'; // Membuat tabel dengan border
-                            $isi_pesan .= '<tr><th style="padding: 10px;">Kode Barang</th><th style="padding: 10px;">Nama Barang</th><th style="padding: 10px;">Jumlah</th><th style="padding: 10px;">Satuan</th></tr>'; // Header tabel
-                            foreach ($data['itemcount'] as $item) { // Iterasi melalui itemcount
-                                $isi_pesan .= '<tr>'; // Baris baru untuk setiap item
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['kodebarang'] . '</td>'; // Kode Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['namabarang'] . '</td>'; // Nama Barang
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['jumlah'] . '</td>'; // Jumlah
-                                $isi_pesan .= '<td style="padding: 10px;">' . $item['satuan'] . '</td>'; // Satuan
-                                $isi_pesan .= '</tr>'; // Menutup baris
-                            }
-                            $isi_pesan .= '</table>'; // Menutup tabel
-                            $email->setMessage($isi_pesan); 
-                            $email->send();
-                            return redirect()->to('/databarang_validasi ');
-                        }
+                    $data['itemcount'] = $this->databarangModel->itemcountbycode($kodebarang);
+                    if (count($data['itemcount']) > 0) {
                         $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan ED cek Dashboard');
                         $alamat_email="ilhamjullypratama3007@gmail.com";
                         $email->setTo($alamat_email);
@@ -513,22 +449,18 @@ class Validasi_QA extends BaseController
                         $isi_pesan = "Berikut List Barang Kalkual yang akan ED <br><br>"; // Menambahkan jarak ke bawah
                         $isi_pesan .= '<table border="1" style="border-collapse: collapse;">'; // Membuat tabel dengan border
                         $isi_pesan .= '<tr><th style="padding: 10px;">Kode Barang</th><th style="padding: 10px;">Nama Barang</th><th style="padding: 10px;">Jumlah</th><th style="padding: 10px;">Satuan</th></tr>'; // Header tabel
-                        foreach ($data['cekexpired'] as $item) { // Iterasi melalui itemcount
-                            $isi_pesan .= '<tr>'; // Baris baru untuk setiap item
-                            $isi_pesan .= '<td style="padding: 10px;">' . $item['kodebarang'] . '</td>'; // Kode Barang
-                            $isi_pesan .= '<td style="padding: 10px;">' . $item['namabarang'] . '</td>'; // Nama Barang
-                            $isi_pesan .= '<td style="padding: 10px;">' . $item['jumlah'] . '</td>'; // Jumlah
-                            $isi_pesan .= '<td style="padding: 10px;">' . $item['expired'] . '</td>'; // Satuan
-                            $isi_pesan .= '</tr>'; // Menutup baris
-                        }
+                        foreach ($data['itemcount'] as $item) {
+                                     $isi_pesan .= '<tr>
+                                    <td style="padding: 10px;">' . $item['kodebarang'] . '</td>
+                                    <td style="padding: 10px;">' . $item['namabarang'] . '</td>
+                                    <td style="padding: 10px;">' . $item['jumlah'] . '</td>
+                                    <td style="padding: 10px;">' . $item['satuan'] . '</td>
+                                   </tr>';}
                         $isi_pesan .= '</table>'; // Menutup tabel
                         $email->setMessage($isi_pesan); 
                         $email->send();
                         return redirect()->to('/databarang_validasi ');
                     }
-
-
-
                     return redirect()->to('/databarang_validasi ');
                 }}
         session()->setFlashdata('alert', 'Data Belum Tersimpan');

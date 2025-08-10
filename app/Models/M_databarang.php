@@ -187,6 +187,16 @@ class M_databarang extends Model
                         ->get()
                         ->getResultArray();
     }
+     public function itemcountbycode($kodebarang)
+    {
+        return $this->db->table('databarang b')
+                    ->select('b.namabarang, b.jumlah, b.kodebarang, b.satuan, d.minimum')
+                    ->join('daftarbarang d', 'b.namabarang = d.namabarang')
+                    ->where('b.kodebarang', $kodebarang)
+                    ->where('b.jumlah < d.minimum')
+                    ->get()
+                    ->getResultArray();
+    }
     public function cekexpired()
     {
         $builder = $this->db->table('databarang');

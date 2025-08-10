@@ -158,7 +158,7 @@ class Cron extends Controller
           </table>
         </div>
         <div class="email-footer">
-          <p>&copy; 2025 QA Bintang7. Semua hak dilindungi. |</p>
+          <p>&copy; 2025 QA . Semua hak dilindungi.</p>
         </div>
       </div>
     </body>
@@ -174,7 +174,7 @@ class Cron extends Controller
     {
         $email = \Config\Services::email();
 
-        $email->setFrom('noreply@QA_B7.com', 'Sistem Reminder');
+        $email->setFrom('noreply@QA.com', 'Sistem Reminder');
         $email->setTo($to);
         $email->setSubject($subject);
         $email->setMessage($message);

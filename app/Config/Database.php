@@ -28,7 +28,7 @@ class Database extends Config
         'DSN'          => '',
         'hostname'     => 'localhost',
         'username'     => 'qabinta1',
-        'password'     => '',
+        'password'     => 'Onekalbe23',
         'database'     => 'qabinta1_SO_QA',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',

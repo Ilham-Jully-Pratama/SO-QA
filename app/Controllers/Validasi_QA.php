@@ -439,21 +439,29 @@ class Validasi_QA extends BaseController
                     $email= \config\Services::email();
                     $data['itemcount'] = $this->databarangModel->itemcountbycode($kodebarang);
                     if (count($data['itemcount']) > 0) {
-                        $this->session->setFlashdata('notif', 'Ada barang QA Kalkual yang akan ED cek Dashboard');
+                        $this->session->setFlashdata('notif', 'Ada barang QA Validasi yang akan Habis cek Informasi');
                         $alamat_email="ilhamjullypratama3007@gmail.com";
                         $email->setTo($alamat_email);
                         $alamat_pengirim="ilhamjullypratama3007@gmail.com";
                         $email->setFrom($alamat_pengirim);
                         $subject="SO Barang Validasi";
                         $email->setSubject($subject);
-                        $isi_pesan = "Berikut List Barang Kalkual yang akan ED <br><br>"; // Menambahkan jarak ke bawah
+                        $isi_pesan = "Berikut List Barang Validasi yang akan Habis <br><br>"; // Menambahkan jarak ke bawah
                         $isi_pesan .= '<table border="1" style="border-collapse: collapse;">'; // Membuat tabel dengan border
-                        $isi_pesan .= '<tr><th style="padding: 10px;">Kode Barang</th><th style="padding: 10px;">Nama Barang</th><th style="padding: 10px;">Jumlah</th><th style="padding: 10px;">Satuan</th></tr>'; // Header tabel
+                        $isi_pesan .= 
+                        '<tr>
+                        <th style="padding: 10px;">Kode Barang</th>
+                        <th style="padding: 10px;">Nama Barang</th>
+                        <th style="padding: 10px;">Jumlah</th>
+                        <th style="padding: 10px;">Minimun</th>
+                        <th style="padding: 10px;">Satuan</th>
+                        </tr>'; // Header tabel
                         foreach ($data['itemcount'] as $item) {
                                      $isi_pesan .= '<tr>
                                     <td style="padding: 10px;">' . $item['kodebarang'] . '</td>
                                     <td style="padding: 10px;">' . $item['namabarang'] . '</td>
                                     <td style="padding: 10px;">' . $item['jumlah'] . '</td>
+                                     <td style="padding: 10px;">' . $item['minimum'] . '</td>
                                     <td style="padding: 10px;">' . $item['satuan'] . '</td>
                                    </tr>';}
                         $isi_pesan .= '</table>'; // Menutup tabel

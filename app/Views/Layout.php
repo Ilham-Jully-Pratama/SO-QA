@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="icon" type="image/png" href="<?= base_url('favicon.jpeg') ?>">
 
         <title>Quality Assurance</title>
 
@@ -139,7 +140,6 @@
                         
                         });
                 }
-        </script>
-       
+        </script>     
    </body>
 </html>

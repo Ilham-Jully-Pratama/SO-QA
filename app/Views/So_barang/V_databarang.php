@@ -78,8 +78,8 @@
                                         <td style="white-space: nowrap; text-align: center; vertical-align: middle;">
                                             <a href="<?= $dd['msds']; ?>"><?= esc('Lihat MSDS'); ?></a>
                                         </td>
-                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['tanggal']; ?></td>
-                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['tanggal_datang']; ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= date('d/m/Y H:i', strtotime($dd['tanggal'])); ?></td>
+                                        <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= date('d/m/Y', strtotime($dd['tanggal_datang'])); ?></td>
                                         <td style="white-space: nowrap;text-align: center; vertical-align: middle;"><?= $dd['nama']; ?></td>
                                         <?php if(in_groups(['supervisor','admin_kalkual'])) :?>
                                         <td>
@@ -120,7 +120,7 @@
 </div>
 <script>
     // Ambil semua tombol hapus
-    const tombolHapus = document.querySelectorAll('#tombolhapusdata');
+    const tombolHapus = document.querySelectorAll('.tombolhapusdata');
     tombolHapus.forEach(tombol => {
         tombol.addEventListener('click', function(event) {
             event.preventDefault(); // Mencegah pengiriman form

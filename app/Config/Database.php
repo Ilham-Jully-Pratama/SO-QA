@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => 'qabintan_qabintan',
-        'password'     => 'Onekalbe23',
-        'database'     => 'qabintan_SO_QA',
+        'username'     => 'qabinta1',
+        'password'     => '',
+        'database'     => 'qabinta1_SO_QA',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

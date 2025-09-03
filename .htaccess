@@ -1,15 +1,22 @@
+# <IfModule mod_rewrite.c>
+# Options +FollowSymLinks
+# RewriteEngine On
+
+# RewriteCond %{REQUEST_URI} !^/public/
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteRule ^(.*)$ /public/$1
+# #RewriteRule ^ index.php [L]
+# RewriteRule ^(/)?$ public/index.php [L]
+# </IfModule>
+# RewriteCond %{HTTP_HOST} ^qabintang7ckr\.my\.id$ [OR]
+# RewriteCond %{HTTP_HOST} ^www\.qabintang7ckr\.my\.id$
+# RewriteRule ^/?$ "https\:\/\/qabintang7ckr\.my\.id\/login" [R=301,L]
+
 <IfModule mod_rewrite.c>
-Options +FollowSymLinks
-RewriteEngine On
-
-RewriteCond %{REQUEST_URI} !^/public/
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ /public/$1
-#RewriteRule ^ index.php [L]
-RewriteRule ^(/)?$ public/index.php [L]
+    RewriteEngine On
+    RewriteBase /SO-QA/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/index.php [L,QSA]
 </IfModule>
-RewriteCond %{HTTP_HOST} ^qabintang7ckr\.my\.id$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.qabintang7ckr\.my\.id$
-RewriteRule ^/?$ "https\:\/\/qabintang7ckr\.my\.id\/login" [R=301,L]
-
